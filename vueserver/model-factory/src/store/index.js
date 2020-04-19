@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     drawer: null,
     signupDialog: false,
+    successSignupAlert: false,
   },
   mutations: {
     changeDrawer() {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     changeSignupDialog(state) {
       state.signupDialog = true;
+    },
+    changeSuccessSignupAlert(state) {
+      state.successSignupAlert = true;
     },
   },
   actions: {},
