@@ -5,13 +5,18 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    drawer: null,
+    drawer: true,
     signupDialog: false,
     successSignupAlert: false,
   },
+  getters: {
+    getDrawer(state) {
+      return state.drawer;
+    },
+  },
   mutations: {
-    changeDrawer() {
-      drawer != drawer;
+    changeDrawer(state) {
+      state.drawer = !state.drawer;
     },
     changeSignupDialog(state) {
       state.signupDialog = true;
