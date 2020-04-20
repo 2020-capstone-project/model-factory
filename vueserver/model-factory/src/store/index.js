@@ -7,22 +7,25 @@ export default new Vuex.Store({
   state: {
     drawer: true,
     signupDialog: false,
-    successSignupAlert: false,
+    successSignup: false,
   },
   getters: {
     getDrawer(state) {
       return state.drawer;
+    },
+    getSuccessSignup(state) {
+      return state.successSignup;
     },
   },
   mutations: {
     changeDrawer(state) {
       state.drawer = !state.drawer;
     },
-    changeSignupDialog(state) {
-      state.signupDialog = true;
-    },
     changeSuccessSignupAlert(state) {
       state.successSignupAlert = true;
+    },
+    changeSuccessSignup(state) {
+      state.successSignup = !state.successSignup;
     },
   },
   actions: {},
