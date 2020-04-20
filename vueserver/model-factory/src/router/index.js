@@ -5,15 +5,20 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: '/signup',
+    name: 'Sign Up',
+    component: () => import('@/views/SignupPage.vue'),
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/LoginPage.vue'),
+  },
+  {
     path: '/home',
     name: 'Home',
     component: () => import('@/views/HomePage.vue'),
   },
-  // {
-  //   path: '/login',
-  //   name: 'Login',
-  //   component: () => import('@/views/LoginPage.vue'),
-  // },
 ];
 
 const router = new VueRouter({
