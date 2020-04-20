@@ -1,18 +1,9 @@
 <template>
   <v-card-text>
     <v-alert v-if="!isSignupValid" type="error" class="ma-3">
-      {{ signupErrorMeesage }}
+      {{ loginErrorMeesage }}
     </v-alert>
     <v-form @submit.prevent="submitSignupForm">
-      <v-text-field
-        label="Name"
-        name="login"
-        prepend-icon="mdi-account"
-        type="text"
-        v-model="name"
-        class="mt-3"
-      ></v-text-field>
-
       <v-text-field
         label="Email"
         name="login"
@@ -30,21 +21,13 @@
         v-model="password"
       ></v-text-field>
 
-      <v-text-field
-        id="password"
-        label="Confirm Password"
-        name="password"
-        prepend-icon="mdi-check"
-        type="password"
-        v-model="confirmPassword"
-      ></v-text-field>
       <v-card-actions>
         <v-alert v-if="isRequestError" type="error" class="ma-3">
           {{ requestErrorMessage }}
         </v-alert>
         <v-spacer></v-spacer>
         <v-btn type="submit" :disabled="!isSignupValid" color="primary"
-          >Create</v-btn
+          >Login</v-btn
         >
       </v-card-actions>
     </v-form>
@@ -52,43 +35,34 @@
 </template>
 
 <script>
-import { registerUser } from '@/api/auth';
+import { loginUser } from '@/api/auth';
 import { validateEmail } from '@/utils/validation';
 
 export default {
   data() {
     return {
-      name: '',
       email: '',
       password: '',
-      confirmPassword: '',
-      signupErrorMeesage: '',
+      loginErrorMeesage: '',
       requestErrorMessage: '',
     };
   },
   computed: {
     isSignupValid() {
-      if (!this.name) {
+      if (!this.email) {
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.signupErrorMeesage = '이름을 반드시 입력해주세요';
-      } else if (!this.email) {
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.signupErrorMeesage = '이메일을 반드시 입력해주세요';
+        this.loginErrorMeesage = '이메일을 반드시 입력해주세요';
       } else if (!validateEmail(this.email)) {
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.signupErrorMeesage = '이메일을 올바르게 작성해주세요';
+        this.loginErrorMeesage = '이메일을 올바르게 작성해주세요';
       } else if (!this.password) {
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.signupErrorMeesage = '비밀번호를 반드시 입력해주세요.';
-      } else if (this.password !== this.confirmPassword) {
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.signupErrorMeesage =
-          '비밀번호와 비밀번호 확인이 일치하지 않습니다.';
+        this.loginErrorMeesage = '비밀번호를 반드시 입력해주세요.';
       } else {
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.signupErrorMeesage = '';
+        this.loginErrorMeesage = '';
       }
-      return this.signupErrorMeesage === '';
+      return this.loginErrorMeesage === '';
     },
     isRequestError() {
       return this.requestErrorMessage !== '';
@@ -98,12 +72,11 @@ export default {
     async submitSignupForm() {
       try {
         const userData = {
-          name: this.name,
           email: this.email,
           password: this.password,
         };
-        const result = await registerUser(userData);
-        this.$store.commit('changeSuccessSignup');
+        const result = await loginUser(userData);
+        this.$store.commit('changeSuccessLogin');
         this.initSignupForm();
       } catch (error) {
         console.log(error.response.data.message);
@@ -111,10 +84,8 @@ export default {
       }
     },
     initSignupForm() {
-      this.name = '';
       this.email = '';
       this.password = '';
-      this.confirmPassword = '';
     },
   },
 };
