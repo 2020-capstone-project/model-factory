@@ -3,27 +3,30 @@
     <v-card class="elevation-12">
       <v-card class="elevation-12" width="800px">
         <v-toolbar color="primary" dark flat>
-          <v-toolbar-title>Login</v-toolbar-title>
+          <v-toolbar-title>Sign up</v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
-        <template>
-          <LoginForm></LoginForm>
+        <template v-if="!$store.getters.getSuccessSignup">
+          <SignupForm></SignupForm>
         </template>
-        <!-- <template v-if="$store.getters.getSuccessSignup">
+        <template v-if="$store.getters.getSuccessSignup">
           <SignupSuccess></SignupSuccess>
-        </template> -->
+        </template>
       </v-card>
     </v-card>
   </v-layout>
 </template>
 
 <script>
-import LoginForm from '@/components/LoginForm.vue';
+import SignupForm from '@/components/SignupForm.vue';
 import SignupSuccess from '@/components/SignupSuccess.vue';
+import { registerUser } from '@/api/auth';
+import { validateEmail } from '@/utils/validation';
 
 export default {
   components: {
-    LoginForm,
+    SignupForm,
+    SignupSuccess,
   },
 };
 </script>
