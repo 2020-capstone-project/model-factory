@@ -75,9 +75,10 @@ export default {
           email: this.email,
           password: this.password,
         };
-        const result = await loginUser(userData);
-        this.$store.commit('changeSuccessLogin');
+        // const result = await loginUser(userData);
+        await this.$store.dispatch('LOGIN', userData);
         this.initSignupForm();
+        this.$router.push('/home');
       } catch (error) {
         console.log(error.response.data.message);
         this.requestErrorMessage = error.response.data.message;

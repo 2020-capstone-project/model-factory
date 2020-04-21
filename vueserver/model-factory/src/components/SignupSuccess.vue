@@ -14,7 +14,7 @@
     </v-alert>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn color="primary" @click="pushHomePage">Home</v-btn>
+      <v-btn color="normal" @click="pushHomePage">Home</v-btn>
       <v-spacer></v-spacer>
     </v-card-actions>
   </v-card-text>
@@ -25,6 +25,7 @@ export default {
   methods: {
     pushHomePage() {
       this.$router.push('/home');
+      this.$store.commit('changeSuccessSignup');
     },
   },
 };
