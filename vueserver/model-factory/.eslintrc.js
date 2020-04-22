@@ -22,6 +22,9 @@ module.exports = {
         arrowParens: "avoid",
       },
     ],
+    "vue/no-use-v-if-with-v-for": ["error", {
+      "allowUsingIterationVar": false
+    }]
   },
   parserOptions: {
     parser: "babel-eslint",

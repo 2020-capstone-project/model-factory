@@ -80,7 +80,6 @@ export default {
         this.initSignupForm();
         this.$router.push('/home');
       } catch (error) {
-        console.log(error.response.data.message);
         this.requestErrorMessage = error.response.data.message;
       }
     },

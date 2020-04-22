@@ -5,6 +5,18 @@
     app
   >
     <v-list dense>
+      <template v-if="$store.getters.isLogin">
+        <v-list-item two-line>
+          <v-list-item-avatar>
+            <v-icon>mdi-account-circle</v-icon>
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title>{{ $store.getters.getName }}</v-list-item-title>
+            <v-list-item-subtitle>Logged In</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </template>
+      <v-divider></v-divider>
       <v-list-item @click="pushHomePage">
         <v-list-item-action>
           <v-icon>mdi-home</v-icon>
@@ -69,13 +81,7 @@ export default {
       this.$router.push('/home');
     },
     logout() {
-      console.log(this.$store.getters.getSessionId);
-      logoutUser({
-        sessionId: this.$store.getters.getSessionId,
-      });
-      this.$store.commit('clearSessionId');
       this.$store.commit('clearName');
-      deleteCookie('auth');
     },
   },
   computed: {

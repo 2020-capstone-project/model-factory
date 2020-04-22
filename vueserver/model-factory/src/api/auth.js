@@ -8,8 +8,4 @@ function loginUser(userData) {
   return auth.post('login', userData);
 }
 
-function logoutUser(userData) {
-  return auth.post('logout', userData);
-}
-
-export { registerUser, loginUser, logoutUser };
+export { registerUser, loginUser };

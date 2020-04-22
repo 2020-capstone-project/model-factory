@@ -9,9 +9,6 @@
         <template>
           <LoginForm></LoginForm>
         </template>
-        <!-- <template v-if="$store.getters.getSuccessSignup">
-          <SignupSuccess></SignupSuccess>
-        </template> -->
       </v-card>
     </v-card>
   </v-layout>
@@ -19,7 +16,6 @@
 
 <script>
 import LoginForm from '@/components/LoginForm.vue';
-import SignupSuccess from '@/components/SignupSuccess.vue';
 
 export default {
   components: {
