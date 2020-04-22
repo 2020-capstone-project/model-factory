@@ -1,7 +1,7 @@
 <template>
   <v-card-text>
     <v-alert
-      :value="$store.state.successSignup"
+      :value="$store.state.successAdjust"
       color="green"
       dark
       border="top"
@@ -10,7 +10,7 @@
       :class="`d-flex justify-center`"
       class="ma-4"
     >
-      회원 가입이 완료되었습니다.
+      회원 수정이 완료되었습니다.
     </v-alert>
     <v-card-actions>
       <v-spacer></v-spacer>
@@ -25,7 +25,7 @@ export default {
   methods: {
     pushHomePage() {
       this.$router.push('/home');
-      this.$store.commit('changeSuccessSignup');
+      this.$store.commit('changeSuccessAdjust');
     },
   },
 };

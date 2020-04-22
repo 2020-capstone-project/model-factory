@@ -27,36 +27,36 @@
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
+
       <template v-if="!isUserLogin">
-        <v-list-item @click="pushLoginPage">
+        <v-list-item
+          v-for="item in notLoggedItems"
+          :key="item.title"
+          @click="item.click"
+        >
           <v-list-item-action>
-            <v-icon>mdi-login</v-icon>
+            <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>
-              Login
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item @click="pushSingupPage">
-          <v-list-item-action>
-            <v-icon>mdi-account-plus</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>
-              Sign Up
+              {{ item.title }}
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </template>
+
       <template v-else>
-        <v-list-item @click="logout">
+        <v-list-item
+          v-for="item in loggedItems"
+          :key="item.title"
+          @click="item.click"
+        >
           <v-list-item-action>
-            <v-icon>mdi-logout</v-icon>
+            <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>
-              Logout
+              {{ item.title }}
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -70,6 +70,34 @@ import { logoutUser } from '@/api/auth';
 import { deleteCookie } from '@/utils/cookies';
 
 export default {
+  data() {
+    return {
+      notLoggedItems: [
+        {
+          click: this.pushLoginPage,
+          icon: 'mdi-login',
+          title: 'Login',
+        },
+        {
+          click: this.pushSingupPage,
+          icon: 'mdi-account-plus',
+          title: 'Sign up',
+        },
+      ],
+      loggedItems: [
+        {
+          click: this.pushMyInfoPage,
+          icon: 'mdi-account',
+          title: 'My Info',
+        },
+        {
+          click: this.logout,
+          icon: 'mdi-logout',
+          title: 'Logout',
+        },
+      ],
+    };
+  },
   methods: {
     pushSingupPage() {
       this.$router.push('/signup');
@@ -79,6 +107,9 @@ export default {
     },
     pushHomePage() {
       this.$router.push('/home');
+    },
+    pushMyInfoPage() {
+      this.$router.push('/myinfo');
     },
     logout() {
       this.$store.commit('clearName');

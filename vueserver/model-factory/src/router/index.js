@@ -19,6 +19,11 @@ const routes = [
     name: 'Home',
     component: () => import('@/views/HomePage.vue'),
   },
+  {
+    path: '/myinfo',
+    name: 'My Info',
+    component: () => import('@/views/MyInfoPage.vue'),
+  },
 ];
 
 const router = new VueRouter({

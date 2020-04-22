@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { loginUser } from '../api/auth';
-import { saveAuthToCookie, getAuthFromCookie } from '@/utils/cookies';
+import { adjustInfo } from '../api/info';
 
 Vue.use(Vuex);
 
@@ -10,8 +10,9 @@ export default new Vuex.Store({
     drawer: true,
     signupDialog: false,
     successSignup: false,
-    successSignin: false,
+    successAdjust: false,
     name: '',
+    email: '',
     loginState: false,
   },
   getters: {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     getSuccessSignup(state) {
       return state.successSignup;
     },
+    getSuccessAdjust(state) {
+      return state.successAdjust;
+    },
     isLogin(state) {
       state.loginState = state.name !== '';
       return state.loginState;
@@ -28,19 +32,19 @@ export default new Vuex.Store({
     getName(state) {
       return state.name;
     },
+    getEmail(state) {
+      return state.email;
+    },
   },
   mutations: {
     changeDrawer(state) {
       state.drawer = !state.drawer;
     },
-    changeSuccessSignupAlert(state) {
-      state.successSignupAlert = true;
-    },
     changeSuccessSignup(state) {
       state.successSignup = !state.successSignup;
     },
-    changeSuccessSignin(state) {
-      state.successSignin = !state.successSignin;
+    changeSuccessAdjust(state) {
+      state.successAdjust = !state.successAdjust;
     },
     setName(state, name) {
       state.name = name;
@@ -48,11 +52,23 @@ export default new Vuex.Store({
     clearName(state) {
       state.name = '';
     },
+    setEmail(state, email) {
+      state.email = email;
+    },
+    clearEmail(state) {
+      state.email = '';
+    },
   },
   actions: {
     async LOGIN({ commit }, userData) {
       const { data } = await loginUser(userData);
       commit('setName', data.name);
+      commit('setEmail', data.email);
+    },
+    async ADJUST({ commit }, userData) {
+      await adjustInfo(userData);
+      commit('setName', userData.name);
+      commit('changeSuccessAdjust');
     },
   },
   modules: {},

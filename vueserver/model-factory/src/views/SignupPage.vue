@@ -1,3 +1,4 @@
+<script src="../store/index.js"></script>
 <template>
   <v-layout align-center justify-center>
     <v-card class="elevation-12">
@@ -20,8 +21,6 @@
 <script>
 import SignupForm from '@/components/SignupForm.vue';
 import SignupSuccess from '@/components/SignupSuccess.vue';
-import { registerUser } from '@/api/auth';
-import { validateEmail } from '@/utils/validation';
 
 export default {
   components: {
