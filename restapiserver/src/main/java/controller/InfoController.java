@@ -1,10 +1,12 @@
 package controller;
 
 import command.AdjustRequest;
+import command.InfoRequest;
 import command.InfoResponse;
 import dto.Member;
 import error.MemberNotFoundException;
 import error.UnauthorizedException;
+import error.WrongPasswordException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import service.AuthService;
@@ -19,26 +21,25 @@ public class InfoController {
   @Autowired
   private AuthService authService;
 
-  @GetMapping("/{id}")
-  public InfoResponse info(@PathVariable int id, HttpSession session) {
-    try {
-      Member member = authService.getInfo(id, session);
-      return new InfoResponse(member.getName(), member.getEmail());
-    } catch (MemberNotFoundException e) {
-      throw new MemberNotFoundException();
-    } catch (UnauthorizedException e1) {
-      throw new UnauthorizedException();
-    }
-  }
+//  @GetMapping
+//  public InfoResponse info(@RequestBody InfoRequest request) {
+//    try {
+//      Member member = authService.getInfo(request.getEmail());
+//      return new InfoResponse(member.getName(), member.getEmail());
+//    } catch (MemberNotFoundException e) {
+//      throw new MemberNotFoundException();
+//    }
+//  }
 
   @PutMapping
-  public void adjust(@RequestBody @Valid AdjustRequest request, HttpSession session) {
+  public void adjust(@RequestBody @Valid AdjustRequest request) {
     try {
-      authService.update(request.getName(), request.getPassword(), request.getEmail(), session);
+      authService.login(request.getEmail(), request.getCurrentPassword());
+      authService.update(request.getName(), request.getNewPassword(), request.getEmail());
     } catch (MemberNotFoundException e) {
       throw new MemberNotFoundException();
-    } catch (UnauthorizedException e2) {
-      throw new UnauthorizedException();
+    } catch (WrongPasswordException e3) {
+      throw new WrongPasswordException();
     }
   }
 

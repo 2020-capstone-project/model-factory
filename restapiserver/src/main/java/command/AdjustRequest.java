@@ -13,6 +13,8 @@ public class AdjustRequest {
   @NotBlank
   private String email;
   @NotBlank
-  private String password;
+  private String currentPassword;
+  @NotBlank
+  private String newPassword;
 
 }

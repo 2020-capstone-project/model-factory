@@ -31,24 +31,17 @@ public class AuthService {
     memberMapper.insert(name, email, password);
   }
 
-  public Member getInfo(int id, HttpSession session) {
-    Member member = memberMapper.selectOneById(id);
-    System.out.println(member.getEmail());
-    if (member == null)
-      throw new MemberNotFoundException();
-    if (session.getAttribute(member.getEmail()) == null) {
-      System.out.println(session.getAttribute(member.getEmail()));
-      throw new UnauthorizedException();
-    }
-    return member;
-  }
+//  public Member getInfo(String email) {
+//    Member member = memberMapper.selectOneByEmail(email);
+//    if (member == null)
+//      throw new MemberNotFoundException();
+//    return member;
+//  }
 
-  public void update(String name, String password, String email, HttpSession session) {
+  public void update(String name, String password, String email) {
     Member member = memberMapper.selectOneByEmail(email);
     if (member == null)
       throw new MemberNotFoundException();
-    if (session.getAttribute(member.getEmail()) == null)
-      throw new UnauthorizedException();
     memberMapper.update(name, password, email);
   }
 
