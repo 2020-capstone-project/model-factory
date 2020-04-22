@@ -1,12 +1,10 @@
 package controller;
 
 import command.LoginRequest;
-import command.LogoutRequest;
 import command.SignUpRequest;
 import dto.Member;
 import error.DuplicateEmailException;
 import error.MemberNotFoundException;
-import error.UnauthorizedException;
 import error.WrongPasswordException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import service.AuthService;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @RestController
@@ -26,27 +23,13 @@ public class AuthController {
   private AuthService service;
 
   @PostMapping("/login")
-  public Member login(@RequestBody @Valid LoginRequest request, HttpSession session) {
+  public Member login(@RequestBody @Valid LoginRequest request) {
     try {
-      Member member = service.login(request.getEmail(), request.getPassword());
-      session.setAttribute(member.getEmail(), member);
-      return member;
+      return service.login(request.getEmail(), request.getPassword());
     } catch (MemberNotFoundException e1) {
       throw new MemberNotFoundException();
     } catch (WrongPasswordException e2) {
       throw new WrongPasswordException();
-    }
-  }
-
-  @PostMapping("/logout")
-  public void logout(@RequestBody @Valid LogoutRequest request, HttpSession session) {
-    try {
-      Member member = service.getInfo(request.getId(), session);
-      session.removeAttribute(member.getEmail());
-    } catch (MemberNotFoundException e) {
-      throw new MemberNotFoundException();
-    } catch (UnauthorizedException e2) {
-      throw new UnauthorizedException();
     }
   }
 

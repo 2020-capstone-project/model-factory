@@ -33,10 +33,13 @@ public class AuthService {
 
   public Member getInfo(int id, HttpSession session) {
     Member member = memberMapper.selectOneById(id);
+    System.out.println(member.getEmail());
     if (member == null)
       throw new MemberNotFoundException();
-    if (session.getAttribute(member.getEmail()) == null)
+    if (session.getAttribute(member.getEmail()) == null) {
+      System.out.println(session.getAttribute(member.getEmail()));
       throw new UnauthorizedException();
+    }
     return member;
   }
 
