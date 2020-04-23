@@ -21,16 +21,6 @@ public class InfoController {
   @Autowired
   private AuthService authService;
 
-//  @GetMapping
-//  public InfoResponse info(@RequestBody InfoRequest request) {
-//    try {
-//      Member member = authService.getInfo(request.getEmail());
-//      return new InfoResponse(member.getName(), member.getEmail());
-//    } catch (MemberNotFoundException e) {
-//      throw new MemberNotFoundException();
-//    }
-//  }
-
   @PutMapping
   public void adjust(@RequestBody @Valid AdjustRequest request) {
     try {
