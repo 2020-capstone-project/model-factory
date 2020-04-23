@@ -47,8 +47,7 @@
 * **POST /auth/login**
   * 수신 데이터: String email(이메일), String password(비밀번호)
   * 송신 데이터
-    * 성공 시: Integer id(식별자), String name(이름), String email(이메일), String password(비밀번호)
-      * Session에 회원 정보를 저장하고 데이터 및 `200` 반환
+    * 성공 시: Integer id(식별자), String name(이름), String email(이메일), String password(비밀번호) 그리고 `200` 반환
     * 실패 시
       * 일치하는 아이디가 존재하지 않을 때 `404` 반환
       * 비밀번호가 맞지 않을 때  `401` 반환
