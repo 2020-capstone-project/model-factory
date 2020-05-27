@@ -76,10 +76,6 @@
 
 <br>
 
-<img src="https://user-images.githubusercontent.com/43431081/79348199-a6843100-7f6f-11ea-9ac8-f00d736bb33d.png" alt="image" style="zoom:33%;" />
-
-<br>
-
 ## ER 모델
 
 ![image](https://user-images.githubusercontent.com/43431081/82983753-a6c22280-a02b-11ea-9e77-b058d5768462.png)
