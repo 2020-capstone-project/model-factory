@@ -33,6 +33,8 @@
 * **컬럼(_COLUMN)**
   * 번호(id)
   * 컬럼 이름(name)
+  * 컬럼 최대값(maxValue)
+  * 컬럼 최소값(minValue)
   * 컬럼 설명(description)
   * 해당 파일 번호(fileId)
 * **데이터(DATA)**
@@ -199,3 +201,4 @@
     foreign key (modelId) references model (id)
   );
   ```
+
