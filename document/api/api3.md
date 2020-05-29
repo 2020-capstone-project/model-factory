@@ -132,7 +132,6 @@
   ```json
   [
     {
-      "id": Integer,					// 컬럼 번호
       "name": String,					// 컬럼 이름
       "description": String,	// 컬럼 설명
       "data": [								// 예시 값
@@ -146,7 +145,7 @@
 * *SQL*
 
   ```sql
-  select id, name, description
+  select name, description
   from _column c
   where c.fileId = #{fileId}
   ```
@@ -163,6 +162,125 @@
 
 ### POST /learning
 
+학습 요청 API
+
+* *수신 데이터*
+
+  ```json
+  {
+    "fileId": Integer,									// 학습시킬 파일 번호
+    "prediction": String,								// 예측 정보
+    "inputColumn" : [ 									// 학습 입력 컬럼
+      String, 													// 컬럼 이름
+      ...,
+    ],
+    "outputColumn" : [									// 학습 목표 컬럼
+      String,														// 컬럼 이름
+      ...,
+    ],
+    "batchSize": Integer,								// 배치 사이즈
+    "epoch": Integer,										// 에포크
+    "lossFunction": String,							// 손실 함수
+    "optimizerFunction": String,				// 최적화 함수
+    "memberId": Integer,								// 학습을 요청한 회원 번호
+    "layer": [													// 레이어
+      {
+        "number": Integer,							// 번호(0, 1, 2, ...)
+        "activationFunction": String,		// 활성화 함수
+        "neuronCoun": Integer,					// 뉴런 개수
+      },
+      ...,
+    ]
+  }
+  ```
+
+* *반환 데이터*
+
+  ```json
+  {
+    "learningId": Integer // 학습 번호
+  }
+  ```
+
+* *매퍼*
+
+  1. 학습 생성
+
+     ```sql
+     insert into learning 
+     (batchSize, epoch, lossFunction, optimizerFunction, learningDate, memberId) values
+     (#{batchSize}, #{epoch}, #{loss}, #{optimizer}, now(), #{memberId})
+     ```
+
+  2. 모델 생성
+
+     ```sql
+     insert into model
+     (createdDate, learninId) values (now(), #{learningId})
+     ```
+
+  3. 레이어 생성
+
+     ```sql
+     insert into layer
+     (number, activationFunction, neuronCount, modelId) values
+     (#{number}, #{activation}, #{neuron}, #{modelId})
+     ```
+
+  4. 파일 경로 조회
+
+     ```sql
+     select path
+     from _file
+     where id = #{fileId}
+     ```
+
+<br>
+
+### Spring => Flask POST /learning
+
+Spring이 Flask에게 학습 요청 API
+
+* *송신 데이터*
+
+  ```json
+  {
+    "filepath": String,									// 학습시킬 파일 경로
+    "learningId": Integer,							// 학습 번호
+    "prediction": String,								// 예측 정보
+    "inputColumn" : [ 									// 학습 입력 컬럼
+      String, 													// 컬럼 이름
+      ...,
+    ],
+    "outputColumn" : [									// 학습 목표 컬럼
+      String,														// 컬럼 이름
+      ...,
+    ],
+    "batchSize": Integer,								// 배치 사이즈
+    "epoch": Integer,										// 에포크
+    "lossFunction": String,							// 손실 함수
+    "optimizerFunction": String,				// 최적화 함수
+    "layer": [													// 레이어
+      {
+        "number": Integer,							// 번호(0, 1, 2, ...)
+        "activationFunction": String,		// 활성화 함수
+        "neuronCoun": Integer,					// 뉴런 개수
+      },
+      ...,
+    ]
+  }
+  ```
+
+* *수신 데이터*
+
+  ```json
+  {
+    "filepath": String // 모델 SVG 파일 경로
+  }
+  ```
+
+* *매퍼(구상중)*
+
 <br>
 
 # Flask REST API
@@ -170,6 +288,8 @@
 ## 추천 학습 모델 검토
 
 ### GET /recommendedmodel?inputcount={inputcount}&outputcount={outputcount}&prediction={prediction}
+
+추천 학습 모델 조회 API
 
 * *수신 데이터*
 
@@ -196,6 +316,52 @@
       },
       ...
     ]
+  }
+  ```
+
+<br>
+
+## 학습 요청
+
+### POST /learning
+
+학습 요청 API
+
+* *수신 데이터*
+
+  ```json
+  {
+    "filepath": String,									// 학습시킬 파일 경로
+    "learningId": Integer,							// 학습 번호
+    "prediction": String,								// 예측 정보
+    "inputColumn" : [ 									// 학습 입력 컬럼
+      String, 													// 컬럼 이름
+      ...,
+    ],
+    "outputColumn" : [									// 학습 목표 컬럼
+      String,														// 컬럼 이름
+      ...,
+    ],
+    "batchSize": Integer,								// 배치 사이즈
+    "epoch": Integer,										// 에포크
+    "lossFunction": String,							// 손실 함수
+    "optimizerFunction": String,				// 최적화 함수
+    "layer": [													// 레이어
+      {
+        "number": Integer,							// 번호(0, 1, 2, ...)
+        "activationFunction": String,		// 활성화 함수
+        "neuronCoun": Integer,					// 뉴런 개수
+      },
+      ...,
+    ]
+  }
+  ```
+
+* *반환 데이터*
+
+  ```json
+  {
+    "filepath": String // 모델 SVG 파일 경로
   }
   ```
 
