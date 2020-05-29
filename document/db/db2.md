@@ -80,125 +80,202 @@
 
 ## ER 모델
 
-![image](https://user-images.githubusercontent.com/43431081/82983753-a6c22280-a02b-11ea-9e77-b058d5768462.png)
+![image](https://user-images.githubusercontent.com/43431081/83231762-00ab1f80-a1c7-11ea-826f-56468bdb8a4d.png)
 
 <br>
 
 ## SQL
 
-* **MEMBER**
+### MEMBER
+
+```sql
+create table MEMBER (
+  id serial primary key,
+  name varchar(15),
+  email varchar(30),
+  password varchar(15)
+);
+```
+
+<br>
+
+### _FILE
+
+```sql
+create table _FILE (
+  id serial primary key,
+  name varchar(50),
+  path varchar(100),
+  description text,
+  memberId integer,
+  foreign key (memberId) references member (id)
+);
+```
+
+* **INSERT**
 
   ```sql
-  create table MEMBER (
-    id serial primary key,
-    name varchar(15),
-    email varchar(30),
-    password varchar(15)
-  );
+  insert into _file
+  (name, path, description, memberId) values
+  ('홍릉_도심_미세먼지_측정자료', '/Users/sangminlee/model-factory/restapiserver/src/main/resources/홍릉_도심_미세먼지_측정자료.csv', '홍등 도심의 미세먼지를 측정한 자료 입니다.', 1);
   ```
 
-* **_FILE**
+<br>
+
+### _COLUMN
+
+```sql
+create table _COLUMN (
+  id serial primary key,
+  name varchar(50),
+  description text,
+  fileId integer,
+  foreign key (fileId) references _file (id)
+);
+```
+
+* **INSERT**
 
   ```sql
-  create table _FILE (
-    id serial primary key,
-    name varchar(50),
-    path varchar(100),
-    description text,
-    memberId integer,
-    foreign key (memberId) references member (id)
-  );
+  insert into _column
+  (name, description, fileId) values
+  ('관측시간', '미세먼지를 관측한 시간을 나타낸다', '1'),
+  ('Avoc-PM10(㎍/m³)', '미세먼지 농도', '1'),
+  ('Avoc-PM2.5(㎍/m³)', '초미세먼지 농도', '1'),
+  ('Avoc-PM1.0(㎍/m³)', '극초미세먼지 농도', '1'),
+  ('Avoc-TC', '', '1'),
+  ('Bvoc-TC', '', '1'),
+  ('온도(℃)', '', '1'),
+  ('습도(%)', '', '1'),
+  ('풍향', '', '1'),
+  ('풍속(㎧)', '', '1');
   ```
 
-* **_COLUMN**
+<br>
+
+### DATA
+
+```sql
+create table DATA (
+  id serial primary key,
+  value varchar(50),
+  columnId integer,
+  foreign key (columnId) references _column (id)
+);
+```
+
+* **INSERT**
 
   ```sql
-  create table _COLUMN (
-    id serial primary key,
-    name varchar(50),
-    description text,
-    fileId integer,
-    foreign key (fileId) references _file (id)
-  );
+  insert into data (value, columnId) values
+  ('2019.8.29 10:50', 1),
+  ('2019.8.29 11:00', 1),
+  ('2019.8.29 11:10', 1),
+  ('20.1', 2),
+  ('18.1', 2),
+  ('15.6', 2),
+  ('16.8', 3),
+  ('16.2', 3),
+  ('13.9', 3),
+  ('13.8', 4),
+  ('14.2', 4),
+  ('12.3', 4),
+  ('218056.7', 5),
+  ('202776.1', 5),
+  ('169940.3', 5),
+  ('219992.8', 6),
+  ('38767.2', 6),
+  ('46447.7', 6),
+  ('24.7', 7),
+  ('21.2', 7),
+  ('20.3', 7),
+  ('80.1', 8),
+  ('94', 8),
+  ('95.1', 8),
+  ('1.4', 9),
+  ('0.8', 9),
+  ('1.2', 9),
+  ('271.7', 10),
+  ('250.9', 10),
+  ('220.3', 10);
   ```
 
-* **DATA**
+<br>
 
-  ```sql
-  create table DATA (
-    id serial primary key,
-    value double precision,
-    columnId integer,
-    foreign key (columnId) references _column (id)
-  );
-  ```
+### LEARNING
 
-* **LEARNING**
+```sql
+create table LEARNING (
+  id serial primary key,
+  batchSize integer,
+  epoch integer,
+  lossFunction varchar(20),
+  optimizerFunction varchar(20),
+  learningDate timestamp,
+  memberId integer,
+  foreign key (memberId) references member (id)
+);
+```
 
-  ```sql
-  create table LEARNING (
-    id serial primary key,
-    batchSize integer,
-    epoch integer,
-    lossFunction varchar(20),
-    optimizerFunction varchar(20),
-    learningDate timestamp,
-    memberId integer,
-    foreign key (memberId) references member (id)
-  );
-  ```
+<br>
 
-* **HISTORY**
+### HISTORY
 
-  ```sql
-  create table HISTORY (
-    id serial primary key,
-    trainLoss double precision,
-    trainAccuracy double precision,
-    verificationLoss double precision,
-    verificationAccuracy double precision,
-    testLoss double precision,
-    testAccuracy double precision,
-    createdDate timestamp,
-    executedEpoch integer,
-    learningId integer,
-    foreign key (learningId) references learning (id)
-  );
-  ```
+```sql
+create table HISTORY (
+  id serial primary key,
+  trainLoss double precision,
+  trainAccuracy double precision,
+  verificationLoss double precision,
+  verificationAccuracy double precision,
+  testLoss double precision,
+  testAccuracy double precision,
+  createdDate timestamp,
+  executedEpoch integer,
+  learningId integer,
+  foreign key (learningId) references learning (id)
+);
+```
 
-* **MODEL**
+<br>
 
-  ```sql
-  create table MODEL (
-    id serial primary key,
-    filepath varchar(100),
-    createdDate timestamp,
-    learningId integer,
-    foreign key (learningId) references learning (id)
-  );
-  ```
+### MODEL
 
-*  **MODEL_DIAGRAM**
+```sql
+create table MODEL (
+  id serial primary key,
+  filepath varchar(100),
+  createdDate timestamp,
+  learningId integer,
+  foreign key (learningId) references learning (id)
+);
+```
 
-  ```sql
-  create table MODEL_DIAGRAM (
-    id serial primary key,
-    filepath varchar(100),
-    modelId integer,
-    foreign key (modelId) references model (id)
-  );
-  ```
+<br>
 
-* **LAYER**
+### MODEL_DIAGRAM
 
-  ```sql
-  create table LAYER (
-    id serial primary key,
-    number integer,
-    activationFunction varchar(20),
-    neuronCount integer,
-    modelId integer,
-    foreign key (modelId) references model (id)
-  );
-  ```
+```sql
+create table MODEL_DIAGRAM (
+  id serial primary key,
+  filepath varchar(100),
+  modelId integer,
+  foreign key (modelId) references model (id)
+);
+```
+
+<br>
+
+### LAYER
+
+```sql
+create table LAYER (
+  id serial primary key,
+  number integer,
+  activationFunction varchar(20),
+  neuronCount integer,
+  modelId integer,
+  foreign key (modelId) references model (id)
+);
+```
 
