@@ -3,13 +3,12 @@ package service;
 import dto.Member;
 import error.DuplicateEmailException;
 import error.MemberNotFoundException;
-import error.UnauthorizedException;
 import error.WrongPasswordException;
 import mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
-
+@Service
 public class AuthService {
 
   @Autowired
