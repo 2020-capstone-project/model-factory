@@ -1,6 +1,6 @@
 package mapper;
 
-import dto.Member;
+import dto.MemberDto;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -9,10 +9,10 @@ import org.apache.ibatis.annotations.Update;
 public interface MemberMapper {
 
   @Select("select id, name, email, password from member where email=#{email}")
-  Member selectOneByEmail(@Param("email") String email);
+  MemberDto selectOneByEmail(@Param("email") String email);
 
   @Select("select id, name, email from member where id=#{id}")
-  Member selectOneById(@Param("id") int id);
+  MemberDto selectOneById(@Param("id") int id);
 
   @Insert("insert into member (name, email, password) " +
       "values (#{name}, #{email}, #{password})")
