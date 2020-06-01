@@ -1,6 +1,6 @@
 package service;
 
-import dto.Member;
+import dto.MemberDto;
 import error.DuplicateEmailException;
 import error.MemberNotFoundException;
 import error.WrongPasswordException;
@@ -14,18 +14,18 @@ public class AuthService {
   @Autowired
   private MemberMapper memberMapper;
 
-  public Member login(String email, String password) {
-    Member member = memberMapper.selectOneByEmail(email);
-    if (member == null)
+  public MemberDto login(String email, String password) {
+    MemberDto memberDto = memberMapper.selectOneByEmail(email);
+    if (memberDto == null)
       throw new MemberNotFoundException();
-    if (!member.matchPassword(password))
+    if (!memberDto.matchPassword(password))
       throw new WrongPasswordException();
-    return member;
+    return memberDto;
   }
 
   public void signUp(String name, String email, String password) {
-    Member member = memberMapper.selectOneByEmail(email);
-    if (member != null)
+    MemberDto memberDto = memberMapper.selectOneByEmail(email);
+    if (memberDto != null)
       throw new DuplicateEmailException();
     memberMapper.insert(name, email, password);
   }
@@ -38,8 +38,8 @@ public class AuthService {
 //  }
 
   public void update(String name, String password, String email) {
-    Member member = memberMapper.selectOneByEmail(email);
-    if (member == null)
+    MemberDto memberDto = memberMapper.selectOneByEmail(email);
+    if (memberDto == null)
       throw new MemberNotFoundException();
     memberMapper.update(name, password, email);
   }

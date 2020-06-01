@@ -1,6 +1,6 @@
 package service;
 
-import dto.Column;
+import dto.ColumnDto;
 import error.FileNotFoundException;
 import mapper.ColumnMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,8 @@ public class ColumnService {
   @Autowired
   private ColumnMapper mapper;
 
-  public List<Column> selectListByFileId(int id) {
-    List<Column> list = mapper.selectListByFileId(id);
+  public List<ColumnDto> selectListByFileId(int id) {
+    List<ColumnDto> list = mapper.selectListByFileId(id);
     if (list == null || list.size() == 0)
       throw new FileNotFoundException();
     return list;
