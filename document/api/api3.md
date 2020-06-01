@@ -132,10 +132,11 @@
   ```json
   [
     {
+      "id": Integer,					// 컬럼 번호
       "name": String,					// 컬럼 이름
       "description": String,	// 컬럼 설명
       "data": [								// 예시 값
-        Integer, ...
+        String, ...
       ]
     },
     ...
@@ -145,9 +146,9 @@
 * *SQL*
 
   ```sql
-  select name, description
-  from _column c
-  where c.fileId = #{fileId}
+  select id, name, description
+  from _colum
+  where fileId = #{fileId}
   ```
 
   ```sql
@@ -169,12 +170,14 @@
   ```json
   {
     "fileId": Integer,									// 학습시킬 파일 번호
-    "prediction": String,								// 예측 정보
-    "inputColumn" : [ 									// 학습 입력 컬럼
+    "prediction": String,								// 예측 정보 (numeric: 수치,
+    																 		// 	binary : 이진, multiple : 다중)
+    
+    "inputColumns" : [ 									// 학습 입력 컬럼
       String, 													// 컬럼 이름
       ...,
     ],
-    "outputColumn" : [									// 학습 목표 컬럼
+    "outputColumns" : [									// 학습 목표 컬럼
       String,														// 컬럼 이름
       ...,
     ],
@@ -183,11 +186,11 @@
     "lossFunction": String,							// 손실 함수
     "optimizerFunction": String,				// 최적화 함수
     "memberId": Integer,								// 학습을 요청한 회원 번호
-    "layer": [													// 레이어
+    "layers": [													// 레이어
       {
         "number": Integer,							// 번호(0, 1, 2, ...)
         "activationFunction": String,		// 활성화 함수
-        "neuronCoun": Integer,					// 뉴런 개수
+        "neuronCount": Integer,					// 뉴런 개수
       },
       ...,
     ]
@@ -210,6 +213,7 @@
      insert into learning 
      (batchSize, epoch, lossFunction, optimizerFunction, learningDate, memberId) values
      (#{batchSize}, #{epoch}, #{loss}, #{optimizer}, now(), #{memberId})
+     returning id
      ```
 
   2. 모델 생성
