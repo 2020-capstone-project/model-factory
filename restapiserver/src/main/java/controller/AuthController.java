@@ -1,8 +1,8 @@
 package controller;
 
-import dto.LoginRequest;
-import dto.SignUpRequest;
-import dto.Member;
+import dto.LoginRequestDto;
+import dto.SignUpRequestDto;
+import dto.MemberDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,12 +20,12 @@ public class AuthController {
   private AuthService service;
 
   @PostMapping("/login")
-  public Member login(@RequestBody @Valid LoginRequest request) {
+  public MemberDto login(@RequestBody @Valid LoginRequestDto request) {
       return service.login(request.getEmail(), request.getPassword());
   }
 
   @PostMapping("/signup")
-  public void signUp(@RequestBody @Valid SignUpRequest request) {
+  public void signUp(@RequestBody @Valid SignUpRequestDto request) {
       service.signUp(request.getName(), request.getEmail(), request.getPassword());
   }
 

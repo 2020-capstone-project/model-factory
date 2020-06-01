@@ -7,6 +7,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice("controller")
@@ -17,8 +19,8 @@ public class ApiExceptionAdvice {
       MethodArgumentNotValidException ex) {
     String errorCodes = ex.getBindingResult().getAllErrors()
         .stream()
-        .map(error -> error.getCode() + ": " + error.getDefaultMessage())
-        .collect(Collectors.joining(","));
+        .map(error -> Objects.requireNonNull(error.getCodes())[1] + ": " + error.getDefaultMessage())
+        .collect(Collectors.joining(" ,"));
     return ResponseEntity
         .status(HttpStatus.BAD_REQUEST)
         .body(new ErrorResponse(errorCodes));

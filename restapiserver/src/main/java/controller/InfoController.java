@@ -1,6 +1,6 @@
 package controller;
 
-import dto.AdjustRequest;
+import dto.AdjustRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +18,7 @@ public class InfoController {
   private AuthService authService;
 
   @PutMapping
-  public void adjust(@RequestBody @Valid AdjustRequest request) {
+  public void adjust(@RequestBody @Valid AdjustRequestDto request) {
       authService.login(request.getEmail(), request.getCurrentPassword());
       authService.update(request.getName(), request.getNewPassword(), request.getEmail());
   }

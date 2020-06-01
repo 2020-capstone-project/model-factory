@@ -1,11 +1,10 @@
 package controller;
 
-import dto.Column;
-import dto.GetColumnAndDataRequest;
+import dto.ColumnDto;
+import dto.GetColumnAndDataRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import service.ColumnService;
 import service.DataService;
@@ -22,10 +21,10 @@ public class ColumnController {
   private DataService dataService;
 
   @GetMapping("/files/{fileId}/columns")
-  public List<GetColumnAndDataRequest> getColumnAndData(@PathVariable int fileId) {
-    List<Column> columnList = columnService.selectListByFileId(fileId);
+  public List<GetColumnAndDataRequestDto> getColumnAndData(@PathVariable int fileId) {
+    List<ColumnDto> columnList = columnService.selectListByFileId(fileId);
     return columnList.stream()
-        .map(element -> new GetColumnAndDataRequest(
+        .map(element -> new GetColumnAndDataRequestDto(
             element.getName(),
             element.getDescription(),
             dataService.selectListByColumnId(element.getId())
