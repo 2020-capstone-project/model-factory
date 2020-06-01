@@ -227,8 +227,8 @@
 
      ```sql
      insert into layer
-     (number, activationFunction, neuronCount, modelId) values
-     (#{number}, #{activation}, #{neuron}, #{modelId})
+     (number, activationFunction, neuronCount, learningId) values
+     (#{number}, #{activation}, #{neuron}, #{learnindId})
      ```
 
   4. 파일 경로 조회
@@ -312,11 +312,11 @@ Spring이 Flask에게 학습 요청 API
     "epoch": Integer,										// 에포크
     "lossFunction": String,							// 손실 함수
     "optimizerFunction": String,				// 최적화 함수
-    "layer": [													// 레이어
+    "layers": [													// 레이어
       {
         "number": Integer,							// 번호(0, 1, 2, ...)
         "activationFunction": String,		// 활성화 함수
-        "neuronCoun": Integer,					// 뉴런 개수
+        "neuronCount": Integer,					// 뉴런 개수
       },
       ...
     ]
@@ -354,7 +354,7 @@ Spring이 Flask에게 학습 요청 API
       {
         "number": Integer,							// 번호(0, 1, 2, ...)
         "activationFunction": String,		// 활성화 함수
-        "neuronCoun": Integer,					// 뉴런 개수
+        "neuronCount": Integer,					// 뉴런 개수
       },
       ...,
     ]
