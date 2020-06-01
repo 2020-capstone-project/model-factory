@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<div id="app">
+    <button v-on:click="recommended">추천 학습 모델</button>
+    <button v-on:click="customizing">모델 커스터마이징</button>
+</div>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            methods: {
+                recommended: function() {
+                    console.log("recommended model Selected");
+                },
+                customizing: function() {
+                    console.log("customizing model Selected");
+                }
+            }
+        })
+    </script>
+</body>
+</html>

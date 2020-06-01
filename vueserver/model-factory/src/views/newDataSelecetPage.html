@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<h1>데이터 선택</h1>
+<div id="app">
+    <table border="3">
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                테이블 이름    
+            </th>
+            <th>
+                테이블 설명
+            </th>
+        </tr>
+
+
+        <tr>
+            <td>
+        <div><input type="checkbox"></div>
+            </td>
+            <td>
+                강아지 사진 구분
+            </td>
+            <td>
+                여러 종류의 강아지 사진들이 있다.
+            </td>
+            
+        </tr>
+
+
+        <tr>
+            <td>
+        <div><input type="checkbox"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+        <div><input type="checkbox"></div>
+        </tr>
+            </td>
+    </table>    
+    <button v-on:click="back">뒤로</button>
+    <button v-on:click="select">선택</button>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<body>
+    <script>
+        new Vue({
+            el: '#app',
+            methods: {
+                back: function() {
+                    console.log("back button clicked");
+                },
+                select: function() {
+                    console.log("select button clicked");
+                }
+            }
+        })
+    </script>
+</body>
+</html>

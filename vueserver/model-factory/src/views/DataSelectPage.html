@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+<body>
+    <div id="app">
+        <button v-on:click="newData">new-data</button>
+        <button v-on:click="existData">exist-data</button>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            methods: {
+                newData: function() {
+                    console.log("newData Selected");
+                },
+                existData: function() {
+                    console.log("existData Selected");
+                }
+            }
+        })
+    </script>
+</body>
+</html>
+
