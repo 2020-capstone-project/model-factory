@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class InfoRequest {
+public class InfoRequestDto {
 
   private String email;
 

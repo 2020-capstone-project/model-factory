@@ -9,8 +9,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Data {
+public class LayerDto {
 
-  private String value;
+  private int id;
+  private int number;
+  private String activationFunction;
+  private int neuronCount;
+  private int learningId;
 
 }

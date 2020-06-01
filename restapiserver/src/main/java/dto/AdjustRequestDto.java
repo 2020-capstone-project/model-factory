@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotBlank;
 
 @Getter @Setter
-public class AdjustRequest {
+public class AdjustRequestDto {
 
   @NotBlank
   private String name;
