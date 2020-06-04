@@ -56,7 +56,7 @@
   * 학습 번호(learningId)
 * **모델 구성도(MODEL_DIAGRAM)**
   * 번호(id)
-  * 학습 번호(modelId)
+  * 모델 번호(modelId)
   * 구성도 파일 경로(filepath)
 
 <br>
