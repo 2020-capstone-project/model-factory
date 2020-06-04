@@ -368,5 +368,3 @@ Spring이 Flask에게 학습 요청 API
     "filepath": String // 모델 SVG 파일 경로
   }
   ```
-
-  
