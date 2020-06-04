@@ -430,3 +430,5 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/git,macos,flask,pycharm,windows,jetbrains,jetbrains+all,jetbrains+iml
+
+inf/*
