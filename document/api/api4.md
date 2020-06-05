@@ -221,6 +221,7 @@
      ```sql
      insert into model
      (createdDate, learninId) values (now(), #{learningId})
+     returning id
      ```
 
   3. 레이어 생성
@@ -249,8 +250,9 @@ Spring이 Flask에게 학습 요청 API
 
   ```json
   {
-    "filepath": String,									// 학습시킬 파일 경로
-    "learningId": Integer,							// 학습 번호
+    "learningFilepath": String,					// 학습시킬 파일 경로
+    "saveModelFilepath": String,				// 학습 모델 저장 경로
+    "saveDiagramFilepath": String,			// 모델 SVG 다이어그램 저장 경로
     "prediction": String,								// 예측 정보
     "inputColumn" : [ 									// 학습 입력 컬럼
       String, 													// 컬럼 이름
@@ -264,7 +266,7 @@ Spring이 Flask에게 학습 요청 API
     "epoch": Integer,										// 에포크
     "lossFunction": String,							// 손실 함수
     "optimizerFunction": String,				// 최적화 함수
-    "layer": [													// 레이어
+    "layers": [													// 레이어
       {
         "number": Integer,							// 번호(0, 1, 2, ...)
         "activationFunction": String,		// 활성화 함수
