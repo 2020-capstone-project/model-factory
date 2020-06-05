@@ -1,2 +1,2 @@
 # model-factory
-Model Factory (웹 기반 머신 러닝 모델 에디터)
+Model Factory (웹 기반 딥러닝 자동화 플랫폼)
