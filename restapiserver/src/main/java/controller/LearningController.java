@@ -33,8 +33,7 @@ public class LearningController {
         = learningService.insert(new LearningDto(dto));
     ModelDto modelDto = new ModelDto(resultByInsertLearningDto);
     modelService.insert(modelDto);
-    dto.getLayers().forEach(layer -> layer.setModelId(modelDto.getId()));
-    layerService.insert(dto.getLayers());
+    layerService.insert(dto.getLayers(), modelDto.getId());
     // TODO Flask 로 데이터 전송 필요
     return resultByInsertLearningDto;
   }
