@@ -13,8 +13,13 @@ public class LayerService {
   @Autowired
   private LayerMapper mapper;
 
-  public void insert(List<LayerDto> layers) {
-    layers.forEach(layer -> mapper.insert(layer));
+  public void insert(final List<LayerDto> layers, final int modelId) {
+    layers.forEach(layer ->
+        mapper.insert(
+            layer.getNumber(),
+            layer.getActivationFunction(),
+            layer.getNeuronCount(),
+            modelId));
   }
 
 }
