@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Options;
 
 public interface LayerMapper {
 
-  @Insert("insert into layer (number, activationFunction, neuronCount, learningId) " +
-      "values (#{number}, #{activationFunction}, #{neuronCount}, #{learningId})")
+  @Insert("insert into layer (number, activationFunction, neuronCount, modelId) " +
+      "values (#{number}, #{activationFunction}, #{neuronCount}, #{modelId})")
   void insert(LayerDto layerDto);
 
 }

@@ -33,10 +33,8 @@ public class LearningController {
         = learningService.insert(new LearningDto(dto));
     ModelDto modelDto = new ModelDto(resultByInsertLearningDto);
     modelService.insert(modelDto);
-    dto.getLayers().forEach(layer -> layer.setLearningId(resultByInsertLearningDto.getId()));
+    dto.getLayers().forEach(layer -> layer.setModelId(modelDto.getId()));
     layerService.insert(dto.getLayers());
-    System.out.println(fileService.selectPathById(dto.getFileId()));
-    // TODO DB 구조 변경, API 재구현 필요
     // TODO Flask 로 데이터 전송 필요
     return resultByInsertLearningDto;
   }

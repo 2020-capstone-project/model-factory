@@ -15,6 +15,6 @@ public class LayerDto {
   private int number;
   private String activationFunction;
   private int neuronCount;
-  private int learningId;
+  private int modelId;
 
 }
