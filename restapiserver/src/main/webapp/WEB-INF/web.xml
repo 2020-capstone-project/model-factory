@@ -23,6 +23,7 @@
             <!-- 줄바꿈이나 콤마로 구분 -->
             <param-value>
                 config.PersistenceConfig
+                config.ClientConfig
                 config.RestConfig
             </param-value>
         </init-param>
