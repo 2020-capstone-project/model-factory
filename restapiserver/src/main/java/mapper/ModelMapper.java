@@ -8,8 +8,8 @@ import org.apache.ibatis.annotations.Options;
 public interface ModelMapper {
 
   @Options(useGeneratedKeys = true, keyProperty = "id")
-  @Insert("insert into model (createdDate, learningId) values " +
-      "(now(), #{learningId})")
+  @Insert("insert into model (modelPath, diagramPath, createdDate, learningId) values " +
+      "(#{modelPath}, #{diagramPath}, now(), #{learningId})")
   void insert(ModelDto ModelDto);
 
 }
