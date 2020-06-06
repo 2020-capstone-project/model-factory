@@ -14,7 +14,8 @@ import java.sql.Timestamp;
 public class ModelDto {
 
   private int id;
-  private String filepath;
+  private String modelPath;
+  private String diagramPath;
   private Timestamp createdDate;
   private int learningId;
 
