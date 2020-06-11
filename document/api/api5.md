@@ -14,8 +14,8 @@
 
   ```json
   {
-    "email": String,		// 이메일
-    "password": String	// 비밀번호
+    "email": "String",    // 이메일
+    "password": "String"  // 비밀번호
   }
   ```
 
@@ -23,10 +23,10 @@
 
   ```json
   {
-    "id": Integer,			// 회원 번호
-    "name": String,			// 이름
-    "email": String,		// 이메일
-    "password": String	// 비밀번호
+    "id": 0,              // 회원 번호
+    "name": "String",     // 이름
+    "email": "String",    // 이메일
+    "password": "String"  // 비밀번호
   }
   ```
 
@@ -47,9 +47,9 @@
 
   ```json
   {
-    "name": String,			// 이름
-    "email": String,		// 이메일
-    "password": String	// 비밀번호
+    "name": "String",     // 이름
+    "email": "String",    // 이메일
+    "password": "String"  // 비밀번호
   }
   ```
 
@@ -69,12 +69,14 @@
 
   ```json
   {
-    "name": String,							// 이름
-    "email": String,						// 이메일
-    "currentPassword": String,	// 기존 비밀번호
-    "newPassword": String				// 새로운 비밀번호
+    "name": "String",             // 이름
+    "email": "String",            // 이메일
+    "currentPassword": "String",  // 기존 비밀번호
+    "newPassword": "String"       // 새로운 비밀번호
   }
   ```
+
+  
 
 * *결과 코드*
 
@@ -104,9 +106,9 @@
   ```json
   [
     {
-        "id": Integer, 					// 파일 번호
-        "name": String, 				// 파일 이름
-        "description": String 	// 파일 설명
+        "id": 0,                  // 파일 번호
+        "name": "String",         // 파일 이름
+        "description": "String"   // 파일 설명
     },
     ...
   ]
@@ -132,17 +134,16 @@
   ```json
   [
     {
-      "id": Integer,					// 컬럼 번호
-      "name": String,					// 컬럼 이름
-      "description": String,	// 컬럼 설명
-      "data": [								// 예시 값
-        String, ...
+      "id": 0,                  // 컬럼 번호
+      "name": "String",         // 컬럼 이름
+      "description": "String",  // 컬럼 설명
+      "data": [                 // 예시 값
+        "String",
       ]
     },
-    ...
   ]
   ```
-
+  
 * *SQL*
 
   ```sql
@@ -169,39 +170,36 @@
 
   ```json
   {
-    "fileId": Integer,									// 학습시킬 파일 번호
-    "prediction": String,								// 예측 정보 (numeric: 수치,
-    																 		// 	binary : 이진, multiple : 다중)
+    "fileId": 0,                          // 학습시킬 파일 번호
+    "prediction": "String",               // 예측 정보 (numeric: 수치,
+                                          // 	binary : 이진, multiple : 다중)
     
-    "inputColumns" : [ 									// 학습 입력 컬럼
-      String, 													// 컬럼 이름
-      ...,
+    "inputColumns" : [                    // 학습 입력 컬럼
+      "String",                           // 컬럼 이름
     ],
-    "outputColumns" : [									// 학습 목표 컬럼
-      String,														// 컬럼 이름
-      ...,
+    "outputColumns" : [                   // 학습 목표 컬럼
+      "String",                           // 컬럼 이름
     ],
-    "batchSize": Integer,								// 배치 사이즈
-    "epoch": Integer,										// 에포크
-    "lossFunction": String,							// 손실 함수
-    "optimizerFunction": String,				// 최적화 함수
-    "memberId": Integer,								// 학습을 요청한 회원 번호
-    "layers": [													// 레이어
+    "batchSize": 0,                       // 배치 사이즈
+    "epoch": 0,                           // 에포크
+    "lossFunction": "String",             // 손실 함수
+    "optimizerFunction": "String",        // 최적화 함수
+    "memberId": 0,                        // 학습을 요청한 회원 번호
+    "layers": [                           // 레이어
       {
-        "number": Integer,							// 번호(0, 1, 2, ...)
-        "activationFunction": String,		// 활성화 함수
-        "neuronCount": Integer,					// 뉴런 개수
+        "number": 0,                      // 번호(0, 1, 2, ...)
+        "activationFunction": "String",   // 활성화 함수
+        "neuronCount": 0,                 // 뉴런 개수
       },
-      ...,
     ]
   }
   ```
-
+  
 * *반환 데이터*
 
   ```json
   {
-    "learningId": Integer // 학습 번호
+    "learningId": 0 // 학습 번호
   }
   ```
 
@@ -242,53 +240,6 @@
 
 <br>
 
-### Spring => Flask POST /learning
-
-Spring이 Flask에게 학습 요청 API
-
-* *송신 데이터*
-
-  ```json
-  {
-    "learningFilepath": String,					// 학습시킬 파일 경로
-    "saveModelFilepath": String,				// 학습 모델 저장 경로
-    "saveDiagramFilepath": String,			// 모델 SVG 다이어그램 저장 경로
-    "prediction": String,								// 예측 정보
-    "inputColumn" : [ 									// 학습 입력 컬럼
-      String, 													// 컬럼 이름
-      ...,
-    ],
-    "outputColumn" : [									// 학습 목표 컬럼
-      String,														// 컬럼 이름
-      ...,
-    ],
-    "batchSize": Integer,								// 배치 사이즈
-    "epoch": Integer,										// 에포크
-    "lossFunction": String,							// 손실 함수
-    "optimizerFunction": String,				// 최적화 함수
-    "layers": [													// 레이어
-      {
-        "number": Integer,							// 번호(0, 1, 2, ...)
-        "activationFunction": String,		// 활성화 함수
-        "neuronCoun": Integer,					// 뉴런 개수
-      },
-      ...,
-    ]
-  }
-  ```
-
-* *수신 데이터*
-
-  ```json
-  {
-    "filepath": String // 모델 SVG 파일 경로
-  }
-  ```
-
-* *매퍼(구상중)*
-
-<br>
-
 # Flask REST API
 
 ## 추천 학습 모델 검토
@@ -310,15 +261,15 @@ Spring이 Flask에게 학습 요청 API
 
   ```json
   {
-    "batchSize": Integer,								// 배치 사이즈
-    "epoch": Integer,										// 에포크
-    "lossFunction": String,							// 손실 함수
-    "optimizerFunction": String,				// 최적화 함수
-    "layers": [													// 레이어
+    "batchSize": 0,                     // 배치 사이즈
+    "epoch": 0,                         // 에포크
+    "lossFunction": "String",           // 손실 함수
+    "optimizerFunction": "String",      // 최적화 함수
+    "layers": [                         // 레이어
       {
-        "number": Integer,							// 번호(0, 1, 2, ...)
-        "activationFunction": String,		// 활성화 함수
-        "neuronCount": Integer,					// 뉴런 개수
+        "number": 0,                    // 번호(0, 1, 2, ...)
+        "activationFunction": "String", // 활성화 함수
+        "neuronCount": 0,               // 뉴런 개수
       },
       ...
     ]
@@ -337,32 +288,30 @@ Spring이 Flask에게 학습 요청 API
 
   ```json
   {
-    "filepath": String,									// 학습시킬 파일 경로
-    "learningId": Integer,							// 학습 번호
-    "prediction": String,								// 예측 정보
-    "inputColumn" : [ 									// 학습 입력 컬럼
-      String, 													// 컬럼 이름
-      ...,
+    "learningFilepath": "String",           // 학습시킬 파일 경로
+    "saveModelFilepath": "String",          // 학습 모델 저장 경로
+    "saveDiagramFilepath": "String",        // 모델 SVG 다이어그램 저장 경로
+    "prediction": "String",                 // 예측 정보
+    "inputColumn" : [                       // 학습 입력 컬럼
+      "String",                             // 컬럼 이름
     ],
-    "outputColumn" : [									// 학습 목표 컬럼
-      String,														// 컬럼 이름
-      ...,
+    "outputColumn" : [                      // 학습 목표 컬럼
+      "String",                             // 컬럼 이름
     ],
-    "batchSize": Integer,								// 배치 사이즈
-    "epoch": Integer,										// 에포크
-    "lossFunction": String,							// 손실 함수
-    "optimizerFunction": String,				// 최적화 함수
-    "layer": [													// 레이어
+    "batchSize": 0,                         // 배치 사이즈
+    "epoch": 0,                             // 에포크
+    "lossFunction": "String",               // 손실 함수
+    "optimizerFunction": "String",          // 최적화 함수
+    "layers": [                             // 레이어
       {
-        "number": Integer,							// 번호(0, 1, 2, ...)
-        "activationFunction": String,		// 활성화 함수
-        "neuronCount": Integer,					// 뉴런 개수
+        "number": 0,                        // 번호(0, 1, 2, ...)
+        "activationFunction": "String",     // 활성화 함수
+        "neuronCoun": 0,                    // 뉴런 개수
       },
-      ...,
     ]
   }
   ```
-
+  
 * *반환 데이터*
 
   ```json
