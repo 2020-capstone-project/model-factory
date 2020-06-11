@@ -14,23 +14,23 @@
 
 * PostgreSQL
 
-### Back End
+### Back End Server
 
 * Java
 
 * Spring
 * MyBatis
-* Flask
 
-### Front End
+### Front End Server
 
 * JavaScript
 
 * Vue
 
-### Learning
+### Learning Server
 
 * Python
+* Flask
 
 * Keras
 
@@ -40,7 +40,7 @@
 
 * [요구사항 & 구현사항 분석](https://github.com/2020-capstone-project/model-factory/blob/master/document/requirement/requirement3.md)
 * [DB 설계](https://github.com/2020-capstone-project/model-factory/blob/master/document/db/db5.md)
-* [API 설계](https://github.com/2020-capstone-project/model-factory/tree/master/document/api)
+* [API 설계](https://github.com/2020-capstone-project/model-factory/tree/master/document/api/api5.md)
 * [Spring & PostgreSQL & MyBatis 연동](https://github.com/2020-capstone-project/model-factory/tree/master/document/mybatis)
 
 <br>
