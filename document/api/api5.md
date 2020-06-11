@@ -110,10 +110,9 @@
         "name": "String",         // 파일 이름
         "description": "String"   // 파일 설명
     },
-    ...
   ]
   ```
-
+  
 * *SQL*
 
   ```sql
@@ -271,7 +270,6 @@
         "activationFunction": "String", // 활성화 함수
         "neuronCount": 0,               // 뉴런 개수
       },
-      ...
     ]
   }
   ```
