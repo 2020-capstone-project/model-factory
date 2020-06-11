@@ -15,7 +15,7 @@
 * 레이어는 활성화 함수, 뉴런 개수, 모델 번호를 갖는다.
 * 모델 구성도는 학습 번호, 구성도 파일 경로를 갖는다.
 
-
+<br>
 
 ## 명명
 
@@ -73,13 +73,13 @@
 
 <br>
 
-## ER 모델
+## 물리적 설계
 
 ![image](https://user-images.githubusercontent.com/43431081/83940228-f79cfc80-a81d-11ea-8d53-f7ac4c3303c1.png)
 
 <br>
 
-## SQL
+## 구현
 
 ### MEMBER
 
