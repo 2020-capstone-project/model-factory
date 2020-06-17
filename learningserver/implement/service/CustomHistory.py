@@ -5,11 +5,12 @@ from implement.dto.HistoryDto import HistoryDto
 
 
 class CustomHistory(tensorflow.keras.callbacks.Callback):
-    def init(self, totalEpoch, learningId, model):
+    def init(self, totalEpoch, learningId, model, modelPath):
         self.epochCount = 0
         self.epochCycle = totalEpoch * 0.01
         self.learningId = learningId
         self.model = model
+        self.modelPath = modelPath
         self.clientService = ClientService()
 
     def on_epoch_end(self, batch, logs={}):

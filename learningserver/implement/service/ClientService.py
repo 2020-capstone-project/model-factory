@@ -10,7 +10,7 @@ class ClientService:
     # TODO Model 저장 로직 구현
 
     def saveHistory(self, learningId, epochCount, trainLoss, trainAccuracy,
-                    valLoss, valAccuracy, model):
+                    valLoss, valAccuracy, model, modelPath):
         # TODO Spring 서버와 통신이 잘 되는지 확인 필요
         url = self.URL + 'history'
         data = {'learningId': learningId,
