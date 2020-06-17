@@ -1,7 +1,7 @@
 class LearningDto:
 
     def __init__(self, learningId, epochs, batch_size, x_train, x_val, x_test,
-                 y_train, y_val, y_test, x_length, y_length, model, customHistory):
+                 y_train, y_val, y_test, x_length, y_length, model, modelPath, customHistory):
         self.learningId = learningId
         self.epochs = epochs
         self.batchSize = batch_size
