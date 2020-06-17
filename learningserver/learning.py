@@ -34,12 +34,12 @@ data = {
         {
             "number": 0,
             "activationFunction": "relu",
-            "neuronCount": 16
+            "neuronCount": 32
         },
         {
             "number": 1,
             "activationFunction": "relu",
-            "neuronCount": 16
+            "neuronCount": 32
         },
         {
             "number": 2,
@@ -112,9 +112,11 @@ model.compile(optimizer=data.get('optimizerFunction'),
 custom_hist = CustomHistory()
 custom_hist.init()
 
-hist = model.fit(x_train, y_train, epochs=data.get('epoch'),
-                 callbacks=[custom_hist], batch_size=data.get('batchSize'),
-                 validation_data=(x_val, y_val))
+# hist = model.fit(x_train, y_train, epochs=data.get('epoch'),
+#                  callbacks=[custom_hist], batch_size=data.get('batchSize'),
+#                  validation_data=(x_val, y_val))
+
+hist = model.fit(x_train, y_train, epochs=data.get('epoch'), batch_size=data.get('batchSize'))
 
 fig, loss_ax = plt.subplots()
 
