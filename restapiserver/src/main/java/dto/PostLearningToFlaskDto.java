@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PostLearningToFlaskDto {
 
+  private int learningId;
   private String learningFilePath;
   private String modelPath;
   private String diagramPath;
@@ -26,6 +27,7 @@ public class PostLearningToFlaskDto {
   private List<LayerDto> layers;
 
   public PostLearningToFlaskDto(String learningFilePath, ModelDto modelDto, PostLearningRequestDto dto) {
+    this.learningId = modelDto.getLearningId();
     this.learningFilePath = learningFilePath;
     modelPath = modelDto.getModelPath();
     diagramPath = modelDto.getDiagramPath();
