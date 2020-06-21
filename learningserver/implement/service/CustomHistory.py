@@ -23,4 +23,4 @@ class CustomHistory(tensorflow.keras.callbacks.Callback):
                 trainAccuracy=logs.get('accuracy'),
                 valLoss=logs.get('val_loss'),
                 valAccuracy=logs.get('val_accuracy'),
-                model=self.model))
+                model=self.model, modelPath=self.modelPath))
