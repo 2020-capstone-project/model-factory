@@ -8,9 +8,8 @@ app = Flask(__name__)
 @app.route('/learning', methods=['POST'])
 def postLearning():
     learningService = LearningService(request.get_json())
-    learningService.requestLearning()
-    # TODO 에러 발생 시, 400 에러 반환 구현
-    return make_response(jsonify({"message": "success"}), 200)
+    response = learningService.requestLearning()
+    return make_response(jsonify({"message": response['message']}), response['code'])
 
 
 if __name__ == '__main__':
