@@ -14,6 +14,7 @@ class LearningDto:
         self.x_length = x_length
         self.y_length = y_length
         self.model = model
+        self.modelPath = modelPath
         self.customHistory = customHistory
 
     def getData(self):
@@ -21,7 +22,7 @@ class LearningDto:
                 'x_train': self.x_train, 'x_val': self.x_val, 'x_test': self.x_test,
                 'y_train': self.y_train, 'y_val': self.y_val, 'y_test': self.y_test,
                 'x_length': self.x_length, 'y_length': self.y_length, 'model': self.model,
-                'customHistory': self.customHistory}
+                'modelPath': self.modelPath, 'customHistory': self.customHistory}
 
     def getLearningId(self):
         return self.learningId
