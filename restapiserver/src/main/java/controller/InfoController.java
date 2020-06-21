@@ -12,7 +12,8 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/info")
-public class InfoController {
+public class
+InfoController {
 
   @Autowired
   private AuthService authService;

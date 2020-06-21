@@ -29,7 +29,9 @@ public class LearningController {
   private ClientApi clientApi;
 
   @PostMapping("/learning")
-  // @Transactional
+  // TODO @Transactional 사용하여 트랜잭션 처리
+  // TODO 에러 처리
+  // TODO 서비스 분할을 해야 되는지 고민
   public ResultByInsertLearningDto postLearning(@RequestBody @Valid PostLearningRequestDto dto) {
     ResultByInsertLearningDto resultByInsertLearningDto
         = learningService.insert(new LearningDto(dto));
