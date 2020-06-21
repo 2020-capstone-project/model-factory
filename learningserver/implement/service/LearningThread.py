@@ -13,9 +13,13 @@ class LearningThread:
                   validation_data=(x_val, y_val))
 
     def start(self, learningDto):
-        dt = learningDto.getData()
-        Thread(target=self.learn, args=(dt['model'], dt['x_train'], dt['y_train'], dt['epochs'],
-                                        dt['customHistory'], dt['batchSize'], dt['x_val'], dt['y_val'],
-                                        dt['learningId'])).start()
+        try:
+            dt = learningDto.getData()
+            Thread(target=self.learn, args=(dt['model'], dt['x_train'], dt['y_train'], dt['epochs'],
+                                            dt['customHistory'], dt['batchSize'], dt['x_val'], dt['y_val'],
+                                            dt['learningId'])).start()
+            return {"code": 200, "message": 'success'}
+        except:
+            return {"code": 400, "message": 'error'}
 
     # TODO 추후에 학습 정지시키는 메서드 구현
