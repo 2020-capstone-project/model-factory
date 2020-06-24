@@ -4,7 +4,7 @@
 
     <AppHeader></AppHeader>
 
-    <v-main class="grey lighten-3">
+    <v-main class="grey lighten-5">
       <v-container fluid fill-height>
         <router-view></router-view>
       </v-container>
@@ -16,7 +16,7 @@
         tile
         width="100%"
         height="90"
-        class="grey lighten-3 text-center"
+        class="grey lighten-5 text-center"
       >
         <a
           href="https://github.com/2020-capstone-project/model-factory"
