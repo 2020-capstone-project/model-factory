@@ -1,5 +1,5 @@
 <template>
-  <v-layout align-center justify-center>
+  <v-layout align-center justify-center mt-15>
     <v-card class="elevation-12">
       <v-card class="elevation-12" width="800px">
         <v-toolbar color="primary" dark flat>

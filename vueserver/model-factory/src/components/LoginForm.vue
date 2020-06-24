@@ -25,6 +25,7 @@
         <v-alert v-if="isRequestError" type="error" class="ma-3">
           {{ requestErrorMessage }}
         </v-alert>
+        <v-btn @click="pushSignUpPage" color="green text-white">Sign up</v-btn>
         <v-spacer></v-spacer>
         <v-btn type="submit" :disabled="!isSignupValid" color="primary"
           >Login</v-btn
@@ -86,6 +87,9 @@ export default {
     initSignupForm() {
       this.email = '';
       this.password = '';
+    },
+    pushSignUpPage() {
+      this.$router.push('/signup');
     },
   },
 };

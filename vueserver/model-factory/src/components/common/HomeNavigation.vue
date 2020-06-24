@@ -86,6 +86,16 @@ export default {
       ],
       loggedItems: [
         {
+          click: this.pushLearningPage,
+          icon: 'mdi-rotate-left',
+          title: 'Learning',
+        },
+        {
+          click: this.pushLearningStatusPage,
+          icon: 'mdi-chart-bar',
+          title: 'Learning Status',
+        },
+        {
           click: this.pushMyInfoPage,
           icon: 'mdi-account',
           title: 'My Info',
@@ -111,8 +121,15 @@ export default {
     pushMyInfoPage() {
       this.$router.push('/myinfo');
     },
+    pushLearningPage() {
+      this.$router.push('/learning');
+    },
+    pushLearningStatusPage() {
+      this.$router.push('/learning-status');
+    },
     logout() {
       this.$store.commit('clearName');
+      this.$router.push('/home');
     },
   },
   computed: {

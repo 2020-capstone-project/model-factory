@@ -14,6 +14,7 @@ export default new Vuex.Store({
     name: '',
     email: '',
     loginState: false,
+    sequence: 1,
   },
   getters: {
     getDrawer(state) {
@@ -34,6 +35,9 @@ export default new Vuex.Store({
     },
     getEmail(state) {
       return state.email;
+    },
+    getSequence(state) {
+      return state.sequence;
     },
   },
   mutations: {
@@ -57,6 +61,9 @@ export default new Vuex.Store({
     },
     clearEmail(state) {
       state.email = '';
+    },
+    setSequence(state, num) {
+      state.sequence = num;
     },
   },
   actions: {
