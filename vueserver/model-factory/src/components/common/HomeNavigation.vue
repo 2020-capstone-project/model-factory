@@ -1,10 +1,6 @@
 <template>
-  <v-navigation-drawer
-    v-model="$store.state.drawer"
-    :clipped="$vuetify.breakpoint.lgAndUp"
-    app
-  >
-    <v-list dense>
+  <v-navigation-drawer v-model="$store.state.drawer" app absolute>
+    <v-list dense nav>
       <template v-if="$store.getters.isLogin">
         <v-list-item two-line>
           <v-list-item-avatar>

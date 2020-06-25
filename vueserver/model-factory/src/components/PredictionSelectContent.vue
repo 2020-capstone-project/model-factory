@@ -13,9 +13,9 @@
               <p class="text-h5 text--primary">
                 수치 예측
               </p>
-              <!-- <div class="text-subtitle-1">
-                수치를 예측한다
-              </div> -->
+              <div class="text-subtitle-1">
+                설명
+              </div>
             </v-card-text>
             <v-btn
               depressed
@@ -45,9 +45,9 @@
               <p class="text-h5 text--primary">
                 이진 분류 예측
               </p>
-              <!-- <div class=" text-subtitle-1">
-                이진 분류를 예측한다
-              </div> -->
+              <div class=" text-subtitle-1">
+                설명
+              </div>
             </v-card-text>
             <v-btn
               depressed
@@ -77,9 +77,9 @@
               <p class="text-h5 text--primary">
                 다중 분류 예측
               </p>
-              <!-- <div class=" text-subtitle-1">
-                다중 분류를 예측한다
-              </div> -->
+              <div class=" text-subtitle-1">
+                설명
+              </div>
             </v-card-text>
             <v-btn
               depressed
@@ -103,7 +103,6 @@
 </template>
 
 <script>
-// TODO prediction 이 잘 들어가는지 확인
 export default {
   methods: {
     before() {
@@ -111,8 +110,6 @@ export default {
     },
     setPrediction(prediction) {
       this.$store.commit('setPrediction', prediction);
-      console.log(this.$store.getters.getLearningData.prediction);
-
       this.$store.commit('nextSequence');
     },
   },
