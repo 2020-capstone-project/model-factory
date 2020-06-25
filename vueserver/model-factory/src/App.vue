@@ -10,7 +10,7 @@
       </v-container>
     </v-main>
 
-    <v-footer padless>
+    <!-- <v-footer padless>
       <v-card
         flat
         tile
@@ -30,7 +30,7 @@
           2020 — <strong>Model Factory</strong>
         </v-card-text>
       </v-card>
-    </v-footer>
+    </v-footer> -->
   </v-app>
 </template>
 

@@ -78,8 +78,8 @@ export default {
         };
         // const result = await loginUser(userData);
         await this.$store.dispatch('LOGIN', userData);
-        this.initSignupForm();
         this.$router.push('/home');
+        this.initSignupForm();
       } catch (error) {
         this.requestErrorMessage = error.response.data.message;
       }

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row style="height: 800px;" justify="center" align="center">
+    <v-row style="height: 600px;" justify="center" align="center">
       <v-col cols="4">
         <v-card class="text-center" shaped elevation="15" height="500">
           <v-row justify="center" align="center">
@@ -17,7 +17,12 @@
                 내 컴퓨터에서 데이터 파일(CSV)을 업로드
               </div>
             </v-card-text>
-            <v-btn depressed large color="primary text-white" class="mt-11"
+            <v-btn
+              depressed
+              large
+              color="primary text-white"
+              class="mt-11"
+              @click="setDataSelectMenu('upload')"
               >data upload</v-btn
             >
           </v-row>
@@ -45,26 +50,29 @@
                 데이터베이스에서 기존 데이터 불러오기
               </div>
             </v-card-text>
-            <v-btn depressed large color="primary text-white" class="mt-11"
+            <v-btn
+              depressed
+              large
+              color="primary text-white"
+              class="mt-11"
+              @click="setDataSelectMenu('load')"
               >data load</v-btn
             >
           </v-row>
         </v-card>
       </v-col>
     </v-row>
-    <v-row justify="center">
-      <v-btn
-        color="primary"
-        @click="$store.commit('setSequence', $store.getters.getSequence + 1)"
-      >
-        Continue
-      </v-btn>
-    </v-row>
   </v-container>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    setDataSelectMenu(menu) {
+      this.$store.commit('setDataSelectMenu', menu);
+    },
+  },
+};
 </script>
 
 <style></style>

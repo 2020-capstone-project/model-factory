@@ -15,6 +15,19 @@ export default new Vuex.Store({
     email: '',
     loginState: false,
     sequence: 1,
+    dataSelectMenu: '',
+    learningData: {
+      fileId: -1,
+      prediction: '',
+      inputColumns: [],
+      outputColumns: [],
+      batchSize: -1,
+      epoch: -1,
+      lossFunction: '',
+      optimizerFunction: '',
+      email: '',
+      layers: [],
+    },
   },
   getters: {
     getDrawer(state) {
@@ -39,6 +52,15 @@ export default new Vuex.Store({
     getSequence(state) {
       return state.sequence;
     },
+    getDataSelectMenu(state) {
+      return state.dataSelectMenu;
+    },
+    getFileId(state) {
+      return state.learningData.fileId;
+    },
+    getLearningData(state) {
+      return state.learningData;
+    },
   },
   mutations: {
     changeDrawer(state) {
@@ -62,8 +84,26 @@ export default new Vuex.Store({
     clearEmail(state) {
       state.email = '';
     },
-    setSequence(state, num) {
-      state.sequence = num;
+    nextSequence(state) {
+      state.sequence++;
+    },
+    beforeSequence(state) {
+      state.sequence--;
+    },
+    setDataSelectMenu(state, menu) {
+      state.dataSelectMenu = menu;
+    },
+    setFileId(state, id) {
+      state.learningData.fileId = id;
+    },
+    setInputColumns(state, columns) {
+      state.learningData.inputColumns = columns;
+    },
+    setOutputColumns(state, columns) {
+      state.learningData.outputColumns = columns;
+    },
+    setPrediction(state, prediction) {
+      state.learningData.prediction = prediction;
     },
   },
   actions: {
