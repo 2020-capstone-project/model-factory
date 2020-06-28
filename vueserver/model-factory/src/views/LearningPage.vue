@@ -51,15 +51,7 @@
               </v-stepper-content>
 
               <v-stepper-content step="6">
-                <div>
-                  <v-card class="mb-12" color="grey lighten-3"> </v-card>
-                  <v-btn color="grey text-white" @click="e1--">
-                    before
-                  </v-btn>
-                  <v-btn color="primary" @click="e1++" class="ml-5">
-                    Continue
-                  </v-btn>
-                </div>
+                <StartLearningContent></StartLearningContent>
               </v-stepper-content>
             </v-stepper-items>
           </v-stepper>
@@ -97,6 +89,7 @@ import PredictionSelectContent from '@/components/PredictionSelectContent.vue';
 import TableSelectContent from '@/components/TableSelectContent.vue';
 import ModelSelectContent from '@/components/ModelSelectContent.vue';
 import ModelReviewContent from '@/components/ModelReviewContent.vue';
+import StartLearningContent from '@/components/StartLearningContent.vue';
 
 export default {
   components: {
@@ -106,6 +99,7 @@ export default {
     TableSelectContent,
     ModelSelectContent,
     ModelReviewContent,
+    StartLearningContent,
   },
   data() {
     return {};

@@ -7,7 +7,7 @@
             Deep Learning
           </v-card-title>
           <v-card-text class="white text-primary">
-            <v-row>
+            <v-row align="center">
               <v-col cols="4">
                 <v-img src="../../public/img/deeplearning2.png" />
               </v-col>
@@ -18,13 +18,13 @@
                   </v-tab>
                 </v-tabs>
                 <v-tabs-items v-model="tab">
-                  <v-tab-item v-for="item in items" :key="item.tab">
+                  <v-tab-item key="0">
                     <v-card flat>
-                      <template v-if="item.tab == 0">
-                        <HyperparametersReviewContent></HyperparametersReviewContent>
-                      </template>
-                      <template v-else> </template>
+                      <HyperparametersReviewContent></HyperparametersReviewContent>
                     </v-card>
+                  </v-tab-item>
+                  <v-tab-item key="1">
+                    <LayersReviewContent></LayersReviewContent>
                   </v-tab-item>
                 </v-tabs-items>
               </v-col>
@@ -47,10 +47,12 @@
 
 <script>
 import HyperparametersReviewContent from './HyperparametersReviewContent.vue';
+import LayersReviewContent from './LayersReviewContent.vue';
 
 export default {
   components: {
     HyperparametersReviewContent,
+    LayersReviewContent,
   },
   data() {
     return {
