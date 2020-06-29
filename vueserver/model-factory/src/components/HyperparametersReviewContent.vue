@@ -5,7 +5,6 @@
         <v-text-field
           v-model="epoch"
           :rules="epochRules"
-          readonly
           label="에포크(Epoch)"
           required
         ></v-text-field>
@@ -21,12 +20,11 @@
           >
         </v-tooltip>
       </v-col>
-      <v-col class="d-flex" cols="12">
+      <v-col class="d-flex mt-5" cols="12">
         <v-text-field
           class="mt-n6"
           v-model="batchSize"
           :rules="batchSizeRules"
-          readonly
           label="배치 사이즈(Batch Size)"
           required
         ></v-text-field>
@@ -42,13 +40,12 @@
           >
         </v-tooltip>
       </v-col>
-      <v-col class="d-flex mt-3" cols="12">
+      <v-col class="d-flex mt-5" cols="12">
         <v-select
           :items="lossFunctions"
           label="손실 함수 선택"
           v-model="loss"
           outlined
-          readonly
         ></v-select>
         <v-tooltip right>
           <template v-slot:activator="{ on, attrs }">
@@ -68,7 +65,6 @@
           v-model="optimizer"
           label="최적화 함수 선택"
           outlined
-          readonly
         ></v-select>
         <v-tooltip right>
           <template v-slot:activator="{ on, attrs }">

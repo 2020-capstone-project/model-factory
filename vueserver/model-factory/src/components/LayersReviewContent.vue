@@ -3,78 +3,141 @@
     <v-row justify="center" align="center">
       <v-col cols="12">
         <v-card elevation="5" class="mt-5">
-          <v-row align="center">
-            <v-tabs-items v-model="page">
-              <v-tab-item key="1"> asd </v-tab-item>
-              <v-tab-item key="2"> zxc </v-tab-item>
-            </v-tabs-items>
-            <!-- <v-col cols="4" class="text-center text-h5 text-primary"
-              ><b>Layer 0</b>
-            </v-col>
-            <v-col cols="8">
-              <v-col cols="10" class="mt-6">
-                <v-select
-                  :items="optimizerFunctions"
-                  v-model="optimizer"
-                  label="레이어 종류 선택"
-                  outlined
-                  readonly
-                ></v-select>
-              </v-col>
-              <v-col cols="10">
-                <v-select
-                  :items="optimizerFunctions"
-                  v-model="optimizer"
-                  label="활성화 함수 선택"
-                  outlined
-                  readonly
-                ></v-select>
-              </v-col>
-              <v-col cols="10" class="mt-n5">
-                <v-subheader>인풋 비율 설정(%)</v-subheader>
-                <v-card-text class="mt-n5">
-                  <v-row>
-                    <v-col class="pr-4">
-                      <v-slider
-                        v-model="slider"
-                        class="align-center"
-                        :max="max"
-                        :min="min"
-                        hide-details
-                      >
-                        <template v-slot:append>
-                          <v-text-field
+          <v-tabs-items v-model="page">
+            <v-tab-item> </v-tab-item>
+            <v-tab-item>
+              <v-row align="center">
+                <v-col cols="4" class="text-center text-h5 text-primary"
+                  ><b>Layer 0</b>
+                </v-col>
+                <v-col cols="8">
+                  <v-col cols="10" class="mt-6">
+                    <v-select
+                      :items="optimizerFunctions"
+                      v-model="optimizer"
+                      label="레이어 종류 선택"
+                      outlined
+                      readonly
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="10">
+                    <v-select
+                      :items="optimizerFunctions"
+                      v-model="optimizer"
+                      label="활성화 함수 선택"
+                      outlined
+                      readonly
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="10" class="mt-n5">
+                    <v-subheader>인풋 비율 설정(%)</v-subheader>
+                    <v-card-text class="mt-n5">
+                      <v-row>
+                        <v-col class="pr-4">
+                          <v-slider
                             v-model="slider"
-                            class="mt-0 pt-0"
-                            hide-details
-                            single-line
-                            type="number"
-                            style="width: 60px"
-                          ></v-text-field>
-                        </template>
-                      </v-slider>
-                    </v-col>
-                  </v-row>
-                </v-card-text>
-              </v-col>
-              <v-col cols="10">
-                <v-text-field
-                  class="mt-n6"
-                  v-model="batchSize"
-                  :rules="batchSizeRules"
-                  readonly
-                  label="뉴런 개수"
-                  required
-                ></v-text-field>
-              </v-col>
-            </v-col> -->
-          </v-row>
+                            class="align-center"
+                            :max="max"
+                            :min="min"
+                          >
+                            <template v-slot:append>
+                              <v-text-field
+                                v-model="slider"
+                                class="mt-n8 pt-0"
+                                hide-details
+                                single-line
+                                type="number"
+                                style="width: 60px"
+                              ></v-text-field>
+                            </template>
+                          </v-slider>
+                        </v-col>
+                      </v-row>
+                    </v-card-text>
+                  </v-col>
+                  <v-col cols="10">
+                    <v-text-field
+                      class="mt-n6"
+                      v-model="batchSize"
+                      :rules="batchSizeRules"
+                      readonly
+                      label="뉴런 개수"
+                      required
+                    ></v-text-field>
+                  </v-col>
+                </v-col>
+              </v-row>
+            </v-tab-item>
+            <v-tab-item>
+              <v-row align="center">
+                <v-col cols="4" class="text-center text-h5 text-primary"
+                  ><b>Layer 1</b>
+                </v-col>
+                <v-col cols="8">
+                  <v-col cols="10" class="mt-6">
+                    <v-select
+                      :items="optimizerFunctions"
+                      v-model="optimizer"
+                      label="레이어 종류 선택"
+                      outlined
+                      readonly
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="10">
+                    <v-select
+                      :items="optimizerFunctions"
+                      v-model="optimizer"
+                      label="활성화 함수 선택"
+                      outlined
+                      readonly
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="10" class="mt-n5">
+                    <v-subheader>인풋 비율 설정(%)</v-subheader>
+                    <v-card-text class="mt-n5">
+                      <v-row>
+                        <v-col class="pr-4">
+                          <v-slider
+                            v-model="slider"
+                            class="align-center"
+                            :max="max"
+                            :min="min"
+                          >
+                            <template v-slot:append>
+                              <v-text-field
+                                v-model="slider"
+                                class="mt-n8 pt-0"
+                                hide-details
+                                single-line
+                                type="number"
+                                style="width: 60px"
+                              ></v-text-field>
+                            </template>
+                          </v-slider>
+                        </v-col>
+                      </v-row>
+                    </v-card-text>
+                  </v-col>
+                  <v-col cols="10">
+                    <v-text-field
+                      class="mt-n6"
+                      v-model="batchSize"
+                      :rules="batchSizeRules"
+                      readonly
+                      label="뉴런 개수"
+                      required
+                    ></v-text-field>
+                  </v-col>
+                </v-col>
+              </v-row>
+            </v-tab-item>
+          </v-tabs-items>
         </v-card>
       </v-col>
     </v-row>
     <v-row justify="center">
       <v-col cols="8">
-        <v-container class="max-width">
+        <v-container>
           <v-pagination v-model="page" class="my-4" :length="15"></v-pagination>
         </v-container>
       </v-col>
@@ -87,6 +150,68 @@ export default {
   data() {
     return {
       page: 1,
+      pages: [
+        {
+          text: '1',
+        },
+        {
+          text: '2',
+        },
+        {
+          text: '3',
+        },
+        {
+          text: 'zxc',
+        },
+        {
+          text: 'asd',
+        },
+        {
+          text: 'zxc',
+        },
+        {
+          text: 'asd',
+        },
+        {
+          text: 'zxc',
+        },
+        {
+          text: 'asd',
+        },
+        {
+          text: 'zxc',
+        },
+        {
+          text: 'asd',
+        },
+        {
+          text: 'zxc',
+        },
+        {
+          text: 'asd',
+        },
+        {
+          text: 'zxc',
+        },
+        {
+          text: 'asd',
+        },
+        {
+          text: 'zxc',
+        },
+        {
+          text: 'asd',
+        },
+        {
+          text: 'zxc',
+        },
+        {
+          text: 'asd',
+        },
+        {
+          text: 'zxc',
+        },
+      ],
       min: 0,
       max: 100,
       slider: 25,

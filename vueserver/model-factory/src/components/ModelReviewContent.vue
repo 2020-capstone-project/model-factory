@@ -18,12 +18,12 @@
                   </v-tab>
                 </v-tabs>
                 <v-tabs-items v-model="tab">
-                  <v-tab-item key="0">
+                  <v-tab-item>
                     <v-card flat>
                       <HyperparametersReviewContent></HyperparametersReviewContent>
                     </v-card>
                   </v-tab-item>
-                  <v-tab-item key="1">
+                  <v-tab-item>
                     <LayersReviewContent></LayersReviewContent>
                   </v-tab-item>
                 </v-tabs-items>
