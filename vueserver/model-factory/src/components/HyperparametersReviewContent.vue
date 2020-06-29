@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center" align="center" style="height: 500px;">
-    <v-col cols="8">
+    <v-col cols="6">
       <v-col class="d-flex" cols="12">
         <v-text-field
           v-model="epoch"
@@ -9,6 +9,17 @@
           label="에포크(Epoch)"
           required
         ></v-text-field>
+        <v-tooltip right>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="primary" dark v-bind="attrs" v-on="on"
+              >mdi-help</v-icon
+            >
+          </template>
+          <span
+            >에포크란?<br />
+            학습 횟수를 의미합니다.</span
+          >
+        </v-tooltip>
       </v-col>
       <v-col class="d-flex" cols="12">
         <v-text-field
@@ -19,8 +30,19 @@
           label="배치 사이즈(Batch Size)"
           required
         ></v-text-field>
+        <v-tooltip right>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="primary" dark v-bind="attrs" v-on="on"
+              >mdi-help</v-icon
+            >
+          </template>
+          <span
+            >배치사이즈란?<br />
+            설명.</span
+          >
+        </v-tooltip>
       </v-col>
-      <v-col class="d-flex" cols="12">
+      <v-col class="d-flex mt-3" cols="12">
         <v-select
           :items="lossFunctions"
           label="손실 함수 선택"
@@ -28,16 +50,37 @@
           outlined
           readonly
         ></v-select>
+        <v-tooltip right>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="primary" dark v-bind="attrs" v-on="on" class="mt-n5"
+              >mdi-help</v-icon
+            >
+          </template>
+          <span
+            >손실 함수란?<br />
+            설명.</span
+          >
+        </v-tooltip>
       </v-col>
       <v-col class="d-flex" cols="12">
         <v-select
-          class="mt-n5"
           :items="optimizerFunctions"
           v-model="optimizer"
-          label="활성화 함수 선택"
+          label="최적화 함수 선택"
           outlined
           readonly
         ></v-select>
+        <v-tooltip right>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="primary" dark v-bind="attrs" v-on="on" class="mt-n5"
+              >mdi-help</v-icon
+            >
+          </template>
+          <span
+            >최적화 함수란?<br />
+            설명.</span
+          >
+        </v-tooltip>
       </v-col>
     </v-col>
   </v-row>
