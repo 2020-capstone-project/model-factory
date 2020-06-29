@@ -4,7 +4,11 @@
       <v-col cols="12">
         <v-card elevation="5" class="mt-5">
           <v-row align="center">
-            <v-col cols="4" class="text-center text-h5 text-primary"
+            <v-tabs-items v-model="page">
+              <v-tab-item key="1"> asd </v-tab-item>
+              <v-tab-item key="2"> zxc </v-tab-item>
+            </v-tabs-items>
+            <!-- <v-col cols="4" class="text-center text-h5 text-primary"
               ><b>Layer 0</b>
             </v-col>
             <v-col cols="8">
@@ -63,7 +67,7 @@
                   required
                 ></v-text-field>
               </v-col>
-            </v-col>
+            </v-col> -->
           </v-row>
         </v-card>
       </v-col>

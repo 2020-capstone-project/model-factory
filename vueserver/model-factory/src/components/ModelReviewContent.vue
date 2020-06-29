@@ -56,7 +56,7 @@ export default {
   },
   data() {
     return {
-      tab: null,
+      tab: 0,
       items: [
         {
           tab: '하이퍼 파라미터',
