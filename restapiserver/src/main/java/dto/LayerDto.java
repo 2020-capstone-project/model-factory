@@ -5,15 +5,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashMap;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class LayerDto {
 
-  private int id;
   private int number;
-  private String activationFunction;
-  private int neuronCount;
+  private HashMap<String, Object> information;
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder("LayerDto{");
+    sb.append("number=").append(number);
+    sb.append(", information=").append(information);
+    sb.append('}');
+    return sb.toString();
+  }
 
 }
