@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="$store.state.drawer" app absolute>
+  <v-navigation-drawer v-model="$store.state.drawer" app absolute height="100%">
     <v-list dense nav>
       <template v-if="$store.getters.isLogin">
         <v-list-item two-line>

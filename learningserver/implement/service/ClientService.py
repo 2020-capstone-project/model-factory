@@ -17,10 +17,10 @@ class ClientService:
         model.save(modelPath)
         data = {'learningId': learningId,
                 'epochCount': epochCount,
-                'trainLoss': trainLoss,
-                'trainAccuracy': trainAccuracy,
-                'valLoss': valLoss,
-                'valAccuracy': valAccuracy}
+                'trainLoss': float(trainLoss),
+                'trainAccuracy': float(trainAccuracy),
+                'valLoss': float(valLoss),
+                'valAccuracy': float(valAccuracy)}
         print(requests.post(url, json=data))
 
     def requestSaveHistory(self, historyDto):

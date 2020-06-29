@@ -9,7 +9,7 @@ class LearningThread:
     def learn(self, model, x_train, y_train, epochs, customHistory, batchSize, x_val, y_val, learningId):
         # TODO verbose 조정으로 출력문 안나오게 코드 수정
         model.fit(x_train, y_train, epochs=epochs,
-                  callbacks=customHistory, batch_size=batchSize,
+                  callbacks=[customHistory], batch_size=batchSize,
                   validation_data=(x_val, y_val))
 
     def start(self, learningDto):
