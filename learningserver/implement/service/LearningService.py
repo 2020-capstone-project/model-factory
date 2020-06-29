@@ -43,17 +43,19 @@ class LearningService:
         layers = self.requestDto.get('layers')
         model = tf.keras.Sequential()
         for layer in layers:
+            info = layer['information']
             if layer['number'] == 0:
-                model.add(Dense(layer['neuronCount'],
+                model.add(Dense(info['neuronCount'],
                                 input_dim=self.x_length,
-                                activation=layer['activationFunction']))
+                                activation=info['activationFunction']))
             else:
-                activation = layer['activationFunction']
-                neuron = layer['neuronCount']
-                if activation == 'dropout':
-                    model.add(Dropout(neuron * 0.01))
-                else:
+                if info['name'] == 'dense':
+                    activation = info['activationFunction']
+                    neuron = info['neuronCount']
                     model.add(Dense(neuron, activation=activation))
+                elif info['name'] == 'dropout':
+                    model.add(Dropout(info['value']))
+
         self.model = model
 
     def compileModel(self):
