@@ -29,7 +29,7 @@
                 <template v-if="getDataSelectMenu == ''">
                   <DataSelectContent></DataSelectContent>
                 </template>
-                <template v-if="getDataSelectMenu == 'load'">
+                <template v-else-if="getDataSelectMenu == 'load'">
                   <TableSelectContent></TableSelectContent>
                 </template>
               </v-stepper-content>
@@ -47,7 +47,12 @@
               </v-stepper-content>
 
               <v-stepper-content step="5">
-                <ModelReviewContent></ModelReviewContent>
+                <template v-if="getIsSelectModel == 'recommend'">
+                  <ModelReviewContent></ModelReviewContent>
+                </template>
+                <template v-else-if="getIsSelectModel == 'customize'">
+                  <ModelCustomizeContent></ModelCustomizeContent>
+                </template>
               </v-stepper-content>
 
               <v-stepper-content step="6">
@@ -90,6 +95,7 @@ import TableSelectContent from '@/components/TableSelectContent.vue';
 import ModelSelectContent from '@/components/ModelSelectContent.vue';
 import ModelReviewContent from '@/components/ModelReviewContent.vue';
 import StartLearningContent from '@/components/StartLearningContent.vue';
+import ModelCustomizeContent from '@/components/ModelCustomizeContent.vue';
 
 export default {
   components: {
@@ -100,11 +106,15 @@ export default {
     ModelSelectContent,
     ModelReviewContent,
     StartLearningContent,
+    ModelCustomizeContent,
   },
   data() {
     return {};
   },
   computed: {
+    getIsSelectModel() {
+      return this.$store.getters.getIsSelectModel;
+    },
     getDataSelectMenu() {
       return this.$store.getters.getDataSelectMenu;
     },

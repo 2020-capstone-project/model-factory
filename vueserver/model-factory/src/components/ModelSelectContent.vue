@@ -13,7 +13,7 @@
             학습 데이터들과 목표 변수들을 고려하여 학습 모델을 추천해줍니다.
             <v-row justify="end" class="mr-10">
               <v-col cols="1">
-                <v-btn color="info" outlined @click="next">
+                <v-btn color="info" outlined @click="next('recommend')">
                   select
                 </v-btn>
               </v-col>
@@ -37,7 +37,7 @@
             있습니다.
             <v-row justify="end" class="mr-10">
               <v-col cols="1">
-                <v-btn color="info" outlined @click="next">
+                <v-btn color="info" outlined @click="next('customize')">
                   select
                 </v-btn>
               </v-col>
@@ -61,7 +61,8 @@ export default {
     before() {
       this.$store.commit('beforeSequence');
     },
-    next() {
+    next(select) {
+      this.$store.commit('setIsSelectModel', select);
       this.$store.commit('nextSequence');
     },
   },

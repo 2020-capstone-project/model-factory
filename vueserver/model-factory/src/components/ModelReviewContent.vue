@@ -70,6 +70,7 @@ export default {
       this.$store.commit('beforeSequence');
     },
     next() {
+      console.log(this.$store.getters.getLearningData);
       this.$store.commit('nextSequence');
     },
   },

@@ -11,6 +11,7 @@ export default new Vuex.Store({
     signupDialog: false,
     successSignup: false,
     successAdjust: false,
+    userId: '',
     name: '',
     email: '',
     loginState: false,
@@ -28,6 +29,7 @@ export default new Vuex.Store({
       email: '',
       layers: [],
     },
+    isSelectModel: '',
   },
   getters: {
     getDrawer(state) {
@@ -61,6 +63,15 @@ export default new Vuex.Store({
     getLearningData(state) {
       return state.learningData;
     },
+    getIsSelectModel(state) {
+      return state.isSelectModel;
+    },
+    getPrediction(state) {
+      return state.learningData.prediction;
+    },
+    getOutputColumnsLength(state) {
+      return state.learningData.outputColumns.length;
+    },
   },
   mutations: {
     changeDrawer(state) {
@@ -77,6 +88,9 @@ export default new Vuex.Store({
     },
     clearName(state) {
       state.name = '';
+    },
+    setUserId(state, id) {
+      state.userId = id;
     },
     setEmail(state, email) {
       state.email = email;
@@ -105,10 +119,46 @@ export default new Vuex.Store({
     setPrediction(state, prediction) {
       state.learningData.prediction = prediction;
     },
+    setIsSelectModel(state, select) {
+      state.isSelectModel = select;
+    },
+    setOptimizerFunction(state, optimizer) {
+      state.learningData.optimizerFunction = optimizer;
+    },
+    setEpoch(state, epoch) {
+      state.learningData.epoch = epoch;
+    },
+    setLossFunction(state, loss) {
+      state.learningData.lossFunction = loss;
+    },
+    setBatchSize(state, batchSize) {
+      state.learningData.batchSize = batchSize;
+    },
+    setLayers(state, layers) {
+      state.learningData.layers = layers;
+    },
+    resetData(state) {
+      state.sequence = 1;
+      state.dataSelectMenu = '';
+      state.learningData = {
+        fileId: -1,
+        prediction: '',
+        inputColumns: [],
+        outputColumns: [],
+        batchSize: -1,
+        epoch: -1,
+        lossFunction: '',
+        optimizerFunction: '',
+        email: '',
+        layers: [],
+      };
+      state.isSelectModel = '';
+    },
   },
   actions: {
     async LOGIN({ commit }, userData) {
       const { data } = await loginUser(userData);
+      commit('setUserId', data.id);
       commit('setName', data.name);
       commit('setEmail', data.email);
     },

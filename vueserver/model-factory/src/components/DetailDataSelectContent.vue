@@ -108,8 +108,8 @@ export default {
       var inputColumns = [];
       var outputColumns = [];
       this.columns.forEach(element => {
-        if (element.learningTarget) inputColumns.push(element.name);
-        else outputColumns.push(element.name);
+        if (element.learningTarget) outputColumns.push(element.name);
+        else inputColumns.push(element.name);
       });
       if (outputColumns.length < 1) {
         this.valid = false;

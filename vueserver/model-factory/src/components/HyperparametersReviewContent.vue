@@ -1,11 +1,17 @@
 <template>
-  <v-row justify="center" align="center" style="height: 500px;">
+  <v-row
+    v-if="isSelectModel"
+    justify="center"
+    align="center"
+    style="height: 500px;"
+  >
     <v-col cols="6">
       <v-col class="d-flex" cols="12">
         <v-text-field
           v-model="epoch"
           :rules="epochRules"
           label="에포크(Epoch)"
+          readonly
           required
         ></v-text-field>
         <v-tooltip right>
@@ -26,6 +32,7 @@
           v-model="batchSize"
           :rules="batchSizeRules"
           label="배치 사이즈(Batch Size)"
+          readonly
           required
         ></v-text-field>
         <v-tooltip right>
@@ -45,6 +52,7 @@
           :items="lossFunctions"
           label="손실 함수 선택"
           v-model="loss"
+          readonly
           outlined
         ></v-select>
         <v-tooltip right>
@@ -64,6 +72,7 @@
           :items="optimizerFunctions"
           v-model="optimizer"
           label="최적화 함수 선택"
+          readonly
           outlined
         ></v-select>
         <v-tooltip right>
@@ -83,24 +92,26 @@
 </template>
 
 <script>
+import { RecommendModel } from '@/utils/recommendation.js';
+
 export default {
   data() {
     return {
       optimizer: '',
       loss: '',
       optimizerFunctions: [
-        'SGD',
-        'RMSprop',
-        'Adagrad',
-        'Adadelta',
-        'Adam',
-        'Adamax',
-        'Nadam',
+        'sgd',
+        'rmsprop',
+        'adagrad',
+        'adadelta',
+        'adam',
+        'adamax',
+        'nadam',
       ],
       lossFunctions: [
-        'Mean squared error',
-        'Binary crossentropy',
-        'Categorical crossentropy',
+        'mean_squared_error',
+        'binary_crossentropy',
+        'categorical_crossentropy',
       ],
       batchSize: '',
       epoch: '',
@@ -113,7 +124,42 @@ export default {
         v => v >= 100 || '에포크는 100 보다 크거나 같아야 합니다.',
         v => v % 100 == 0 || '에포크는 100 배수이여야 합니다.',
       ],
+      recommendModel: new RecommendModel(),
     };
+  },
+  computed: {
+    isSelectModel() {
+      if (this.$store.getters.getIsSelectModel != '') {
+        this.setHyperparameters(
+          this.recommendModel.getRecommendHyperparameters(
+            this.$store.getters.getPrediction,
+          ),
+        );
+      }
+      return true;
+    },
+  },
+  methods: {
+    setHyperparameters(parameters) {
+      this.optimizer = parameters.optimizerFunction;
+      this.epoch = parameters.epoch;
+      this.loss = parameters.lossFunction;
+      this.batchSize = parameters.batchSize;
+    },
+  },
+  watch: {
+    optimizer: function(newOptimizer) {
+      this.$store.commit('setOptimizerFunction', newOptimizer);
+    },
+    epoch: function(newEpoch) {
+      this.$store.commit('setEpoch', newEpoch);
+    },
+    loss: function(newLoss) {
+      this.$store.commit('setLossFunction', newLoss);
+    },
+    batchSize: function(newBatchSize) {
+      this.$store.commit('setBatchSize', newBatchSize);
+    },
   },
 };
 </script>
