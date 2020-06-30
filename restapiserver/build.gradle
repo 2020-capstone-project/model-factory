@@ -27,6 +27,7 @@ dependencies {
     compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.10.3'
     implementation 'org.apache.tomcat:tomcat-jdbc:10.0.0-M1'
     implementation 'org.hibernate.validator:hibernate-validator:6.1.2.Final'
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
     implementation 'org.projectlombok:lombok:1.18.12'
     annotationProcessor("org.projectlombok:lombok:1.18.8")
 }
