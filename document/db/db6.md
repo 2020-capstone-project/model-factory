@@ -278,5 +278,3 @@ create table LAYER (
   insert into LAYER (number, information, modelId)
   values (#{number}, #{information}, #{modelId})
   ```
-
-  
