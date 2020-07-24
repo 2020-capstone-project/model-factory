@@ -269,7 +269,7 @@
   (#{trainLoss}, #{trainAccuracy}, #{valLoss}, #{valAccuracy}, now(), #{epochCount}, #{learningId})
   ```
 
-  - [ ] History 테이블의 verificationLoss, verificationAccuracy 애트리뷰트들을 validationLoss, validationAccuracy로 수정
+  - [x] History 테이블의 verificationLoss, verificationAccuracy 애트리뷰트들을 validationLoss, validationAccuracy로 수정
 
 <br>
 
