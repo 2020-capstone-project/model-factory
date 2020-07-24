@@ -81,7 +81,7 @@
 
 ## 물리적 설계
 
-![image](https://user-images.githubusercontent.com/43431081/88397909-91852c80-cdff-11ea-96c5-6971dc3623e3.png)
+![image](https://user-images.githubusercontent.com/43431081/88398689-b0d08980-ce00-11ea-93e9-275b563959f0.png)
 
 <br>
 
