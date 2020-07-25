@@ -4,10 +4,10 @@
 
 - [x] learning API 수정
   - [x] LEARNING 을 삽입할 때 학습명(name)도 추가
-- [ ] learning status API 추가
-  - [ ] 학습 현황 리스트 조회 API 구현
+- [x] learning status API 추가
+  - [x] 학습 현황 리스트 조회 API 구현
     * 학습 번호, 학습명, 학습 시작 날짜, 학습 상태, 학습 진행률, 모델 정확도 조회
-  - [ ] 해당 학습 번호의 학습 현황 조회 API 구현
+  - [x] 해당 학습 번호의 학습 현황 조회 API 구현
     * 학습명, 학습 시작 날짜, 학습 진행률, 모델 정확도 조회
     * 훈련 손실, 훈련 정확도, 평가 손실, 평가 정확도 들을 createdDate 오름 차순으로 정렬 후 조회
     * 총 에포크, 배치 사이즈, 손실 함수, 최적화 알고리즘 조회
@@ -284,7 +284,6 @@
   (#{trainLoss}, #{trainAccuracy}, #{valLoss}, #{valAccuracy}, now(), #{epochCount}, #{learningId})
   ```
 
-  - [x] History 테이블의 verificationLoss, verificationAccuracy 애트리뷰트들을 validationLoss, validationAccuracy로 수정
 
 <br>
 
@@ -305,6 +304,63 @@
     "learningProgress": 50,               // 학습 진행률
     "accuracy" : 12.31                    // 모델 정확도
   }
+  ```
+
+* *매퍼*
+
+  ```sql
+  select l.id, l.name, l.learningDate "learningDate", round(h.executedEpoch * 1.0 / l.epoch * 100) "learningProgress", h.validationAccuracy "accuracy"
+  from learning l, history h
+  where l.id = h.learningId and l.memberId = #{id}
+  and h.createdDate in (
+    select max(createdDate)
+    from history
+    group by learningId
+  );
+  ```
+
+<br>
+
+### GET /members/{memberId}/learning-status/{learningId}
+
+해당 학습 번호의 학습 현황 조회 API
+
+* *응답 데이터*
+
+  ```javascript
+  {
+    "trainLoss": [                   // 훈련 손실값 리스트
+      1.0,
+    ],
+    "trainAccuracy": [               // 훈련 정확도 리스트
+      1.0,
+    ],
+    "validationLoss": [              // 평가 손실값 리스트
+      1.0,
+    ],
+    "validationAccuracy": [          // 평가 정확도 리스트
+      1.0,
+    ],
+    "epoch": 10000,                  // 총 에포크
+    "batchSize": 32,                 // 배치 사이즈
+    "lossFunction": "binary",        // 손실 함수
+    "optimizerFunction": "binary"    // 최적화 함수
+  }
+  ```
+
+* *매퍼*
+
+  ```sql
+  -- 손실값, 정확도 리스트 (오름차순)
+  select trainLoss, trainAccuracy, validationLoss, validationAccuracy
+  from history
+  where learningId = #{learningId}
+  order by executedEpoch;
+  
+  -- 하이퍼 파라미터
+  select epoch, batchSize, lossFunction, optimizerFunction
+  from learning
+  where id = #{learningId};
   ```
 
 <br>
