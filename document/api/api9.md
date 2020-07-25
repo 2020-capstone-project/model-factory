@@ -26,7 +26,7 @@
 
 * *요청 데이터*
 
-  ```json
+  ```javascript
   {
     "email": "String",    // 이메일
     "password": "String"  // 비밀번호
@@ -35,7 +35,7 @@
 
 * *응답 데이터*
 
-  ```json
+  ```javascript
   {
     "id": 0,              // 회원 번호
     "name": "String",     // 이름
@@ -59,7 +59,7 @@
 
 * *요청 데이터*
 
-  ```json
+  ```javascript
   {
     "name": "String",     // 이름
     "email": "String",    // 이메일
@@ -81,7 +81,7 @@
 
 * *요청 데이터*
 
-  ```json
+  ```javascript
   {
     "name": "String",             // 이름
     "email": "String",            // 이메일
@@ -117,7 +117,7 @@
 
 * *응답 데이터*
 
-  ```json
+  ```javascript
   [
     {
         "id": 0,                  // 파일 번호
@@ -144,7 +144,7 @@
 
 * *응답 데이터*
 
-  ```json
+  ```javascript
   [
     {
       "id": 0,                  // 컬럼 번호
@@ -181,7 +181,7 @@
 
 * *요청 데이터*
 
-  ```json
+  ```javascript
   {
     "fileId": 0,                          // 학습시킬 파일 번호
     "name": "String",                     // 학습명
@@ -215,7 +215,7 @@
 
 * *응답 데이터*
 
-  ```json
+  ```javascript
   {
     "learningId": 0 // 학습 번호
   }
@@ -266,7 +266,7 @@
 
 * *요청 데이터*
 
-  ```json
+  ```javascript
   {
     "learningId": 0,       // 학습 번호
     "epochCount": 0,       // 실행된 에포크 수
@@ -319,7 +319,7 @@
 
 * *요청 데이터*
 
-  ```json
+  ```javascript
   {
     "learningId": 0,												// 학습 번호
     "learningFilepath": "String",           // 학습시킬 파일 경로
@@ -348,7 +348,7 @@
 
 * *응답 데이터*
 
-  ```json
+  ```javascript
   {
     "filepath": String // 모델 SVG 파일 경로
   }
