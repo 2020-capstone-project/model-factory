@@ -34,6 +34,11 @@ const routes = [
     name: 'Learning Status',
     component: () => import('@/views/LearningStatusPage.vue'),
   },
+  {
+    path: '/learning-status/detail',
+    name: 'Detail Status',
+    component: () => import('@/views/DetailStatusPage.vue'),
+  },
 ];
 
 const router = new VueRouter({
