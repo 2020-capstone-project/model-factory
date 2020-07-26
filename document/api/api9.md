@@ -309,7 +309,7 @@
 * *매퍼*
 
   ```sql
-  select l.id, l.name, l.learningDate "learningDate", round(h.executedEpoch * 1.0 / l.epoch * 100) "learningProgress", h.validationAccuracy "accuracy"
+  select l.id, l.name, l.learningDate "learningDate", round(h.executedEpoch * 1.0 / l.epoch * 100, 0) "learningProgress", round((h.validationAccuracy * 100)::numeric, 2) "accuracy"
   from learning l, history h
   where l.id = h.learningId and l.memberId = #{id}
   and h.createdDate in (
