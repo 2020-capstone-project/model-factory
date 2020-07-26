@@ -11,6 +11,7 @@ export default new Vuex.Store({
     signupDialog: false,
     successSignup: false,
     successAdjust: false,
+    learningDialog: false,
     userId: '',
     name: '',
     email: '',
@@ -26,8 +27,9 @@ export default new Vuex.Store({
       epoch: -1,
       lossFunction: '',
       optimizerFunction: '',
-      email: '',
+      memberId: -1,
       layers: [],
+      name: '',
     },
     isSelectModel: '',
   },
@@ -71,6 +73,12 @@ export default new Vuex.Store({
     },
     getOutputColumnsLength(state) {
       return state.learningData.outputColumns.length;
+    },
+    getLayers(state) {
+      return state.learningData.layers;
+    },
+    getMemberId(state) {
+      return state.userId;
     },
   },
   mutations: {
@@ -137,6 +145,12 @@ export default new Vuex.Store({
     setLayers(state, layers) {
       state.learningData.layers = layers;
     },
+    setMemberId(state) {
+      state.learningData.memberId = state.userId;
+    },
+    setLearningName(state, name) {
+      state.learningData.name = name;
+    },
     resetData(state) {
       state.sequence = 1;
       state.dataSelectMenu = '';
@@ -149,10 +163,17 @@ export default new Vuex.Store({
         epoch: -1,
         lossFunction: '',
         optimizerFunction: '',
-        email: '',
+        memberId: -1,
         layers: [],
+        name: '',
       };
       state.isSelectModel = '';
+    },
+    visibleLearningDialog(state) {
+      state.learningDialog = true;
+    },
+    invisibleLearningDialog(state) {
+      state.learningDialog = false;
     },
   },
   actions: {
