@@ -19,6 +19,8 @@ public class PostLearningRequestDto {
   @Min(1)
   private int fileId;
   @NotBlank
+  private String name;
+  @NotBlank
   private String prediction;
   @Size(min = 1)
   private List<String> inputColumns;

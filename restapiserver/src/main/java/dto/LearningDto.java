@@ -17,6 +17,8 @@ public class LearningDto {
 
   private int id;
   @NotBlank
+  private String name;
+  @NotBlank
   private int batchSize;
   @NotBlank
   private int epoch;
@@ -30,6 +32,7 @@ public class LearningDto {
   private int memberId;
 
   public LearningDto(PostLearningRequestDto dto) {
+    name = dto.getName();
     batchSize = dto.getBatchSize();
     epoch = dto.getEpoch();
     lossFunction = dto.getLossFunction();
