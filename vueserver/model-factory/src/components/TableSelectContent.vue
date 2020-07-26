@@ -37,8 +37,7 @@
       </v-btn>
       <v-col col="1"></v-col>
       <v-btn
-        :loading="loading"
-        :disabled="!isSelectedTable || loading"
+        :disabled="!isSelectedTable"
         color="primary"
         @click="selectTable"
         class="ml-5"
@@ -55,7 +54,6 @@ import { getfiles } from '@/api/file';
 export default {
   data() {
     return {
-      loading: false,
       search: '',
       selected: [],
       headers: [
@@ -75,16 +73,18 @@ export default {
       this.$store.commit('setDataSelectMenu', '');
     },
     async fetchData() {
-      const { data } = await getfiles();
-      this.tables = data;
+      try {
+        this.$store.commit('visibleLearningDialog');
+        const { data } = await getfiles();
+        this.tables = data;
+      } catch (error) {
+      } finally {
+        this.$store.commit('invisibleLearningDialog');
+      }
     },
     selectTable() {
       this.$store.commit('setFileId', this.selected[0].id);
-      this.loading = true;
-      setTimeout(() => {
-        this.$store.commit('nextSequence');
-        this.loading = false;
-      }, 500);
+      this.$store.commit('nextSequence');
     },
   },
   computed: {

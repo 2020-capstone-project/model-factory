@@ -110,12 +110,7 @@ export default {
   computed: {
     isSelectModel() {
       if (this.$store.getters.getIsSelectModel != '') {
-        this.setLayers(
-          this.recommendModel.getRecommendLayers(
-            this.$store.getters.getPrediction,
-            this.$store.getters.getOutputColumnsLength,
-          ),
-        );
+        this.setLayers(this.$store.getters.getLayers);
       }
       return true;
     },

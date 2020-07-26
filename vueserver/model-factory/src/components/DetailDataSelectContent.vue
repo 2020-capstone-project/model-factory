@@ -90,11 +90,20 @@ export default {
   },
   methods: {
     async fetchData() {
-      const { data } = await getColumns(this.$store.getters.getFileId);
-      data.forEach(element => {
-        element.learningTarget = false;
-      });
-      this.columns = data;
+      try {
+        this.$store.commit('visibleLearningDialog');
+        const { data } = await getColumns(this.$store.getters.getFileId);
+        data.forEach(element => {
+          element.learningTarget = false;
+        });
+        this.columns = data;
+      } catch (error) {
+      } finally {
+        this.$store.commit('invisibleLearningDialog');
+      }
+    },
+    stopDialog() {
+      this.dialog = false;
     },
     deleteItem(item) {
       const index = this.columns.indexOf(item);

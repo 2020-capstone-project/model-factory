@@ -56,14 +56,31 @@
 </template>
 
 <script>
+import { RecommendModel } from '@/utils/recommendation.js';
+
 export default {
+  data() {
+    return {
+      recommendModel: new RecommendModel(),
+    };
+  },
   methods: {
     before() {
       this.$store.commit('beforeSequence');
     },
     next(select) {
       this.$store.commit('setIsSelectModel', select);
+      this.setLayers();
       this.$store.commit('nextSequence');
+    },
+    setLayers() {
+      this.$store.commit(
+        'setLayers',
+        this.recommendModel.getRecommendLayers(
+          this.$store.getters.getPrediction,
+          this.$store.getters.getOutputColumnsLength,
+        ),
+      );
     },
   },
 };
