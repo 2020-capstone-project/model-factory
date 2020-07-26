@@ -9,3 +9,5 @@ function createInstanceWithAuth(url) {
 export const auth = createInstanceWithAuth('auth');
 export const info = createInstanceWithAuth('info');
 export const file = createInstanceWithAuth('files');
+export const learning = createInstanceWithAuth('learning');
+export const learningStatus = createInstanceWithAuth('members');
