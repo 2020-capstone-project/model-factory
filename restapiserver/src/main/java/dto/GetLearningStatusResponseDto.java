@@ -21,6 +21,7 @@ public class GetLearningStatusResponseDto {
   private int epoch;
   private int batchSize;
   private String lossFunction;
+  private String optimizerFunction;
 
   public GetLearningStatusResponseDto(List<HistoryDto> historyList,
                                       HyperparameterDto hyperparameterDto) {
@@ -37,6 +38,7 @@ public class GetLearningStatusResponseDto {
     epoch = hyperparameterDto.getEpoch();
     batchSize = hyperparameterDto.getBatchSize();
     lossFunction = hyperparameterDto.getLossFunction();
+    optimizerFunction = hyperparameterDto.getOptimizerFunction();
   }
 
 }
