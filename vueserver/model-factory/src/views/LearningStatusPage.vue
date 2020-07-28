@@ -7,7 +7,8 @@
             :headers="headers"
             :items="statusList"
             :search="search"
-            sort-by="calories"
+            :sort-by.sync="sortBy"
+            :sort-desc.sync="sortDesc"
             class="elevation-1"
           >
             <template v-slot:top>
@@ -23,7 +24,7 @@
               ></v-text-field>
             </template>
             <template v-slot:item.tools="{ item }">
-              <v-icon large class="ml-3" @click="editItem(item)">
+              <v-icon large class="ml-3" @click="pushDetailStatusPage(item)">
                 mdi-note-outline
               </v-icon>
             </template>
@@ -42,6 +43,8 @@ import { getList } from '@/api/learningStatus';
 
 export default {
   data: () => ({
+    sortDesc: true,
+    sortBy: 'learningDate',
     search: '',
     dialog: false,
     headers: [
@@ -69,16 +72,18 @@ export default {
   methods: {
     async fetchData() {
       try {
+        this.$store.commit('visibleLearningDialog');
         const { data } = await getList(this.$store.getters.getMemberId);
         this.statusList = data;
       } catch (error) {
         // TODO 예외 처리: 메시지로 표시
+      } finally {
+        this.$store.commit('invisibleLearningDialog');
       }
     },
-    editItem(item) {
-      this.editedIndex = this.statusList.indexOf(item);
-      this.editedItem = Object.assign({}, item);
-      this.dialog = true;
+    pushDetailStatusPage(item) {
+      this.$store.commit('setDetailStatusInfo', item);
+      this.$router.push('/learning-status/detail');
     },
   },
 };
