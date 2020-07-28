@@ -65,13 +65,17 @@ export default {
     },
     async next() {
       try {
+        this.$store.commit('visibleLearningDialog');
         this.$store.commit('setMemberId');
         this.$store.commit('setLearningName', this.learningName);
         await requestLearning(this.$store.getters.getLearningData);
         this.$router.push('/learning-status');
         this.$store.commit('resetData');
       } catch (error) {
+        // TODO 예외 메시지 페이지에 출력
         console.log(error);
+      } finally {
+        this.$store.commit('invisibleLearningDialog');
       }
     },
   },
