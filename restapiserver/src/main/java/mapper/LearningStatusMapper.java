@@ -14,15 +14,16 @@ public interface LearningStatusMapper {
   @Select("select l.id, l.name, l.learningDate \"learningDate\", " +
       "round(h.executedEpoch * 1.0 / l.epoch * 100) \"learningProgress\", " +
       "round((h.validationAccuracy * 100)::numeric, 2) \"accuracy\" " +
-      "from learning l, history h " +
-      "where l.id = h.learningId and l.memberId = #{id} " +
+      "from learning l left join history h on l.id = h.learningId " +
+      "where l.memberId = #{id} " +
       "and h.createdDate in (" +
       "select max(createdDate) " +
       "from history " +
-      "group by learningId)")
+      "group by learningId) or h.createdDate is null")
   List<GetLearningStatusListResponseDto> selectList(@Param("id") int id);
 
-  @Select("select trainLoss, trainAccuracy, validationLoss, validationAccuracy " +
+  @Select("select trainLoss, round((trainAccuracy * 100)::numeric, 2) \"trainAccuracy\", " +
+      "validationLoss, round((validationAccuracy * 100)::numeric, 2) \"validationAccuracy\" " +
       "from history " +
       "where learningId = #{learningId} " +
       "order by executedEpoch")
