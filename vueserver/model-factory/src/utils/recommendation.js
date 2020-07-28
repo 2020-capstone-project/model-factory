@@ -57,6 +57,7 @@ class RecommendModel {
           number: 5,
           information: {
             name: 'dense',
+            activationFunction: 'linear',
             neuronCount: outputColumnsLength,
           },
         });
