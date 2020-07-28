@@ -32,6 +32,13 @@ export default new Vuex.Store({
       name: '',
     },
     isSelectModel: '',
+    detailStatusInfo: {
+      id: null,
+      accuracy: null,
+      learningDate: null,
+      learningProgress: null,
+      name: null,
+    },
   },
   getters: {
     getDrawer(state) {
@@ -79,6 +86,9 @@ export default new Vuex.Store({
     },
     getMemberId(state) {
       return state.userId;
+    },
+    getDetailStatusInfo(state) {
+      return state.detailStatusInfo;
     },
   },
   mutations: {
@@ -174,6 +184,19 @@ export default new Vuex.Store({
     },
     invisibleLearningDialog(state) {
       state.learningDialog = false;
+    },
+    setDetailStatusInfo(state, info) {
+      state.detailStatusInfo.id = info.id;
+      state.detailStatusInfo.accuracy = info.accuracy;
+      state.detailStatusInfo.learningDate = info.learningDate;
+      state.detailStatusInfo.learningProgress = info.learningProgress;
+      state.detailStatusInfo.name = info.name;
+    },
+    setLearningProgress(state, progress) {
+      state.detailStatusInfo.learningProgress = progress;
+    },
+    setLearningAccuracy(state, accuracy) {
+      state.detailStatusInfo.accuracy = accuracy;
     },
   },
   actions: {
