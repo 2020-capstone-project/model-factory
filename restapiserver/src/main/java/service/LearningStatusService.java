@@ -6,8 +6,11 @@ import error.MemberNotFoundException;
 import mapper.LearningStatusMapper;
 import mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +37,17 @@ public class LearningStatusService {
     return new GetLearningStatusResponseDto(
         learningStatusMapper.selectHistoryList(learningId),
         learningStatusMapper.selectHyperparameters(learningId));
+  }
+
+  public FileSystemResource fileDownload(int memberId, int learningId, HttpServletResponse response) {
+    if (memberMapper.selectOneById(memberId) == null)
+      throw new MemberNotFoundException();
+    File file = new File("/Users/sangminlee/model-factory/restapiserver/src/main/resources/" + learningId
+        + "/model.h5");
+    response.setContentType("application/h5");
+    response.setHeader("Content-Disposition", "attachment; filename=model.h5");
+
+    return new FileSystemResource(file);
   }
 
 }
