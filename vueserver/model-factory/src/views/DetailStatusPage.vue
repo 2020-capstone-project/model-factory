@@ -3,9 +3,11 @@
     <v-row>
       <h1 class="ma-3">학습 현황</h1>
       <v-spacer></v-spacer>
-      <v-btn class="mx-1 ma-3" color="primary">
-        DOWNLOAD MODEL
-      </v-btn>
+      <a :href="fileDownloadLink" download>
+        <v-btn class="mx-1 ma-3" color="primary">
+          DOWNLOAD MODEL
+        </v-btn>
+      </a>
     </v-row>
     <v-row justify="center">
       <v-col cols="3">
@@ -152,6 +154,28 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col cols="6">
+        <v-card elevation="10" class="primary" primary dark>
+          <v-card-title>
+            <strong>학습 테스트 (입력값)</strong>
+          </v-card-title>
+          <v-card-text class="white text-primary">
+            <Chart class="pa-8" :options="lossChartOptions"></Chart>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="6">
+        <v-card elevation="10" class="primary" primary dark>
+          <v-card-title>
+            <strong>학습 테스트 (출력값)</strong>
+          </v-card-title>
+          <v-card-text class="white text-primary">
+            <Chart class="pa-8" :options="lossChartOptions"></Chart>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -176,6 +200,7 @@ export default {
       trainLoss: null,
       validationAccuracy: null,
       validationLoss: null,
+      fileDownloadLink: null,
     },
     trainAccuracy: 0,
     validationAccuracy: 0,
@@ -313,6 +338,12 @@ export default {
   components: { Chart },
   created() {
     this.fetchData();
+    this.fileDownloadLink =
+      'http://localhost:8080/members/' +
+      this.$store.getters.getMemberId +
+      '/learning-status/' +
+      this.$store.getters.getDetailStatusInfo.id +
+      '/download';
     let memberId = this.$store.getters.getMemberId;
     let learningId = this.$store.getters.getDetailStatusInfo.id;
     this.interval = setInterval(this.fetchData, 1000);
