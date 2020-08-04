@@ -36,7 +36,7 @@ public class LearningDto {
     batchSize = dto.getBatchSize();
     epoch = dto.getEpoch();
     lossFunction = dto.getLossFunction();
-    optimizerFunction = dto.getLossFunction();
+    optimizerFunction = dto.getOptimizerFunction();
     memberId = dto.getMemberId();
   }
 
