@@ -23,7 +23,7 @@ class LearningService:
         dataset = pd.read_csv(self.requestDto['learningFilePath'])
 
         # 학습셋, 검증셋, 시험셋 분리
-        self.x_train = dataset[self.requestDto.get('inputColumns')].values.astype('float32')
+        self.x_train = dataset[self.requestDto.get('inputColumns')].values[1:].astype('float32')
         train_length = int(len(self.x_train) * 0.7)
         val_length = int(len(self.x_train) * 0.2)
         self.x_test = self.x_train[train_length + val_length:]
@@ -31,7 +31,7 @@ class LearningService:
         self.x_train = self.x_train[:train_length]
 
         # 학습셋, 검증셋, 시험셋 분리
-        self.y_train = dataset[self.requestDto.get('outputColumns')].values.astype('float32')
+        self.y_train = dataset[self.requestDto.get('outputColumns')].values[1:].astype('float32')
         self.y_test = self.y_train[train_length + val_length:]
         self.y_val = self.y_train[train_length: train_length + val_length]
         self.y_train = self.y_train[:train_length]
