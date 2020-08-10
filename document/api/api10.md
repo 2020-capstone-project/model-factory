@@ -2,6 +2,11 @@
 
 # Spring REST API
 
+- [x] 해당 학습의 모델 다운로드 API 구현
+- [ ] 파일 추가 API 구현
+- [ ] 파일의 공개여부에 따라 가져오는 데이터가 달라지기 때문에, 현재 플랫폼이 갖고 있는 파일들 조회 API 수정
+
+
 <br>
 
 ## 회원
@@ -353,7 +358,7 @@
 
 ### GET /members/{memberId}/learning-status/{learningId}/download
 
-해당 학습의 모델 다운로드
+해당 학습의 모델 다운로드 API
 
 * *응답 데이터*
   * **model.h5** 파일 반환
