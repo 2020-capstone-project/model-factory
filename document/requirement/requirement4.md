@@ -12,21 +12,26 @@
 
    ![image](https://user-images.githubusercontent.com/43431081/89251258-82994800-d651-11ea-997c-6e8af78cf82d.png)
 
-<br>
-
 2. 새로운 데이터 업로드 선택
 
-   ![image](https://user-images.githubusercontent.com/43431081/89251812-f556f300-d652-11ea-965e-035334acddbb.png)
+   ![image](https://user-images.githubusercontent.com/43431081/89356555-0eb27a80-d6f9-11ea-9b0e-8af8a0427b8f.png)
 
    * 파일 예시를 보여준다.
-   * 파일 업로드시 파일 형식 검사
-   * 파일 삽입
-   * 컬럼들 삽입
-   * 데이터 3개 씩 삽입
 
-<br>
+3. 저장 여부 선택
 
-3. 상세 데이터 선택으로 이동
+   ![image](https://user-images.githubusercontent.com/43431081/89356890-ec6d2c80-d6f9-11ea-955f-14b8d3aa95e4.png)
+
+   * Yes 클릭시
+     * 파일 업로드시 파일 형식 검사
+       * 1, 2 행이 값들이 문자열인지와 빈 값이 있는지 검사
+       * N행들이 모두 문자열이 아닌지와 빈 값이 있는지 검사
+     * DB에 데이터 삽입
+       * file 삽입
+       * column 삽입
+       * data 3개 씩 삽입
+
+4. 상세 데이터 선택으로 이동
 
    ![image](https://user-images.githubusercontent.com/43431081/89252367-7d89c800-d654-11ea-95c5-8b81a74d45b0.png)
 
