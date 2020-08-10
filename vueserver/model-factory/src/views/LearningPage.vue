@@ -32,6 +32,9 @@
                 <template v-else-if="getDataSelectMenu == 'load'">
                   <TableSelectContent></TableSelectContent>
                 </template>
+                <template v-else-if="getDataSelectMenu == 'upload'">
+                  <DataUploadContent></DataUploadContent>
+                </template>
               </v-stepper-content>
 
               <v-stepper-content step="2">
@@ -84,23 +87,6 @@
         </v-card-text>
       </v-card>
     </v-footer>
-    <v-dialog
-      v-model="$store.state.learningDialog"
-      hide-overlay
-      persistent
-      width="300"
-    >
-      <v-card color="primary" dark>
-        <v-card-text>
-          잠시만 기다려주세요
-          <v-progress-linear
-            indeterminate
-            color="white"
-            class="mb-0"
-          ></v-progress-linear>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
   </v-container>
 </template>
 
@@ -113,6 +99,7 @@ import ModelSelectContent from '@/components/ModelSelectContent.vue';
 import ModelReviewContent from '@/components/ModelReviewContent.vue';
 import StartLearningContent from '@/components/StartLearningContent.vue';
 import ModelCustomizeContent from '@/components/ModelCustomizeContent.vue';
+import DataUploadContent from '@/components/DataUploadContent';
 
 export default {
   components: {
@@ -124,6 +111,7 @@ export default {
     ModelReviewContent,
     StartLearningContent,
     ModelCustomizeContent,
+    DataUploadContent,
   },
   data() {
     return {
