@@ -20,12 +20,16 @@
             <v-simple-table style="border: 0.1px solid grey">
               <thead>
                 <tr>
-                  <th v-for="title in titles" :key="title">{{ title }}</th>
+                  <th v-for="title in titles" :key="title.num">
+                    {{ title.text }}
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="list in dataList" :key="list">
-                  <td v-for="element in list" :key="element">{{ element }}</td>
+                <tr v-for="list in dataList" :key="list.num">
+                  <td v-for="element in list.text" :key="element.num">
+                    {{ element.text }}
+                  </td>
                 </tr>
               </tbody>
             </v-simple-table>
@@ -33,7 +37,9 @@
           <v-row justify="center" align="center" class="mt-7">
             <v-col cols="10">
               <v-file-input
-                v-model="file"
+                enctype="multipart/form-data"
+                name="file"
+                v-model="csv.file"
                 show-size
                 accept=".csv"
                 label="파일(.csv)을 업로드 해주세요."
@@ -52,7 +58,7 @@
       <v-btn
         color="primary"
         :disabled="!isUploadFile"
-        :click="() => {}"
+        @click="upload"
         class="ml-5"
         >upload</v-btn
       >
@@ -61,11 +67,25 @@
 </template>
 
 <script>
+import { uploadFile } from '@/api/upload';
+
+function numberingList(list) {
+  var i = 1;
+  return list.map(function(element) {
+    return {
+      num: i++,
+      text: element,
+    };
+  });
+}
+
 export default {
   data() {
     return {
-      file: null,
-      titles: [
+      csv: {
+        file: null,
+      },
+      titles: numberingList([
         '임신 횟수',
         '혈장 포도당 농도',
         '이완기 혈압',
@@ -75,9 +95,9 @@ export default {
         '당뇨 직계 가족력',
         '나이',
         '당뇨병 발병 여부',
-      ],
-      dataList: [
-        [
+      ]),
+      dataList: numberingList([
+        numberingList([
           '임신 횟수',
           '경구 포도당 내성 검사에서 2시간 동안의 혈장 포도당 농도',
           '이완기 혈압(mm/Hg)',
@@ -87,19 +107,29 @@ export default {
           '당뇨 직계 가족력',
           '나이(세)',
           '5년 이내 당뇨병 발병 여부',
-        ],
-        [6, 148, 72, 35, 0, 33.6, 0.627, 50, 1],
-      ],
+        ]),
+        numberingList([6, 148, 72, 35, 0, 33.6, 0.627, 50, 1]),
+      ]),
     };
   },
   methods: {
     before() {
       this.$store.commit('setDataSelectMenu', '');
     },
+    async upload() {
+      try {
+        let formData = new FormData();
+        formData.append('file', this.csv.file);
+        const result = await uploadFile(formData);
+        console.log(result);
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
+    },
   },
   computed: {
     isUploadFile() {
-      return this.file !== null;
+      return this.csv.file !== null;
     },
   },
 };
