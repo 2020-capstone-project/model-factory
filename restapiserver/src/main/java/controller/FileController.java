@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import service.FileService;
+import util.FileValidCheckUtil;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -23,8 +25,8 @@ public class FileController {
   }
 
   @PostMapping("/upload")
-  public void upload(@RequestParam("file") MultipartFile multipartFile) {
-
+  public void upload(@RequestParam MultipartFile file) throws IOException {
+    service.upload(file);
   }
 
 }
