@@ -106,7 +106,6 @@ export default {
         this.$store.commit('changeSuccessSignup');
         this.initSignupForm();
       } catch (error) {
-        console.log(error.response.data.message);
         this.requestErrorMessage = error.response.data.message;
       }
     },
