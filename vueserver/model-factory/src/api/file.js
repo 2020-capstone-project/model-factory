@@ -1,7 +1,7 @@
 import { file } from './index';
 
-function getfiles() {
-  return file.get();
+function getfiles(id) {
+  return file.get(id);
 }
 
 function getColumns(fileId) {
