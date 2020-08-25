@@ -81,8 +81,6 @@
   }
   ```
 
-  
-
 * *결과 코드*
 
   * `200` : 회원정보 수정 성공
@@ -97,6 +95,24 @@
 ### POST /upload
 
 파일 업로드 요청 API
+
+* *요청 데이터*
+
+  * CSV 파일
+
+  * fileInfo
+
+    ```javascript
+    {
+      "email": string,
+      "isPublic": boolean,
+      "description": string
+    }
+    ```
+
+* *응답 데이터*
+
+  * `200` : 저장 성공
 
 <br>
 
