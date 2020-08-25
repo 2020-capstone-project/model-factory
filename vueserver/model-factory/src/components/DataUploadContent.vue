@@ -8,10 +8,10 @@
             (1행: 컬럼명, 2행: 컬럼 설명, N행: 데이터)
           </p>
         </v-row>
-        <v-row>
+        <v-row v-if="errorMessage !== ''">
           <v-col cols="12">
             <v-alert type="error">
-              파일 형식이 잘못되었습니다.
+              {{ errorMessage }}
             </v-alert>
           </v-col>
         </v-row>
@@ -34,20 +34,38 @@
               </tbody>
             </v-simple-table>
           </v-col>
-          <v-row justify="center" align="center" class="mt-7">
-            <v-col cols="10">
-              <v-file-input
-                enctype="multipart/form-data"
-                name="file"
-                v-model="csv.file"
-                show-size
-                accept=".csv"
-                label="파일(.csv)을 업로드 해주세요."
-                dense
-              ></v-file-input>
-            </v-col>
-          </v-row>
         </v-row>
+        <v-row justify="center" class="mt-2">
+          <v-col cols="6">
+            <v-switch
+              v-model="isPublic"
+              :label="`파일 공개 여부 : ${isPublicValue}`"
+            ></v-switch>
+          </v-col>
+        </v-row>
+        <v-row justify="center" class="mt-7">
+          <v-col cols="6">
+            <v-file-input
+              enctype="multipart/form-data"
+              name="file"
+              v-model="csv.file"
+              show-size
+              accept=".csv"
+              label="파일(.csv)을 업로드 해주세요."
+              dense
+            ></v-file-input>
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col cols="6">
+        <v-text-field
+          v-model="fileDescription"
+          label="파일 설명을 입력해주세요."
+          :rules="rules"
+          outlined
+        ></v-text-field>
       </v-col>
     </v-row>
     <v-row justify="center" align="center" class="mt-5">
@@ -82,6 +100,10 @@ function numberingList(list) {
 export default {
   data() {
     return {
+      errorMessage: '',
+      isPublic: false,
+      fileDescription: '',
+      rules: [value => !!value || '파일 설명을 반드시 입력해주세요.'],
       csv: {
         file: null,
       },
@@ -118,18 +140,43 @@ export default {
     },
     async upload() {
       try {
+        let userEmail = this.getUserEmail();
+        if (userEmail == null) return;
+
         let formData = new FormData();
         formData.append('file', this.csv.file);
+
+        // let info = {
+        //   email: userEmail,
+        //   isPublic: this.isPublic,
+        //   description: this.fileDescription,
+        // };
+
+        formData.append('email', userEmail);
+        formData.append('isPublic', this.isPublic);
+        formData.append('description', this.fileDescription);
         const result = await uploadFile(formData);
         console.log(result);
       } catch (error) {
+        this.errorMessage = error.response.data.message;
         console.log(error.response.data.message);
       }
+    },
+    getUserEmail() {
+      let userEmail = this.$store.getters.getEmail;
+      if (userEmail === '') {
+        this.errorMessage = '반드시 로그인을 해주세요.';
+        return null;
+      }
+      return userEmail;
     },
   },
   computed: {
     isUploadFile() {
-      return this.csv.file !== null;
+      return this.csv.file !== null && this.fileDescription !== '';
+    },
+    isPublicValue() {
+      return this.isPublic == true ? '공개' : '비공개';
     },
   },
 };
