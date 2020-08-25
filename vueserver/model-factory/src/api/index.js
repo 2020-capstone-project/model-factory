@@ -11,3 +11,4 @@ export const info = createInstanceWithAuth('info');
 export const file = createInstanceWithAuth('files');
 export const learning = createInstanceWithAuth('learning');
 export const learningStatus = createInstanceWithAuth('members');
+export const upload = createInstanceWithAuth('upload');
