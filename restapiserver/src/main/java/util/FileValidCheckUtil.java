@@ -1,23 +1,16 @@
 package util;
 
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvValidationException;
 import error.ColumnDescriptionIsNumericException;
+import error.MinExistValueSizeException;
 import error.NotExistValueException;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class FileValidCheckUtil {
-
-  private final String DIRECTORY_PATH = "/Users/sangminlee/model-factory/restapiserver/src/main/resources/files/";
+public class FileValidCheckUtil extends FileUtil {
 
   private FileValidCheckUtil() {}
 
@@ -31,23 +24,6 @@ public class FileValidCheckUtil {
     return validRecords(getRecords(multipartFile));
   }
 
-  private List<List<String>> getRecords(MultipartFile multipartFile) throws IOException {
-    List<List<String>> records = new ArrayList<>();
-    try (CSVReader csvReader = new CSVReader(getFileReader(multipartFile.getName()))) {
-      String[] values;
-      while ((values = csvReader.readNext()) != null) {
-        records.add(Arrays.asList(values));
-      }
-    } catch (IOException | CsvValidationException e) {
-      throw new IOException();
-    }
-    return records;
-  }
-
-  private FileReader getFileReader(String fileName) throws FileNotFoundException {
-    return new FileReader(DIRECTORY_PATH + fileName + ".csv");
-  }
-
   public boolean validRecords(List<List<String>> records) {
     if (!columnDescriptionIsNotNumeric(records))
       throw new ColumnDescriptionIsNumericException();
@@ -55,6 +31,8 @@ public class FileValidCheckUtil {
     records.remove(0);
     if (!existAllValue(records))
       throw new NotExistValueException();
+    if (records.size() < 102)
+      throw new MinExistValueSizeException();
     return true;
   }
 
