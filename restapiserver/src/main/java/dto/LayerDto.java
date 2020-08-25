@@ -16,13 +16,4 @@ public class LayerDto {
   private int number;
   private HashMap<String, Object> information;
 
-  @Override
-  public String toString() {
-    final StringBuilder sb = new StringBuilder("LayerDto{");
-    sb.append("number=").append(number);
-    sb.append(", information=").append(information);
-    sb.append('}');
-    return sb.toString();
-  }
-
 }

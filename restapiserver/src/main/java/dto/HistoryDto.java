@@ -18,14 +18,4 @@ public class HistoryDto {
   private double validationLoss;
   private double validationAccuracy;
 
-  @Override
-  public String toString() {
-    final StringBuilder sb = new StringBuilder("HistoryDto{");
-    sb.append("trainLoss=").append(trainLoss);
-    sb.append(", trainAccuracy=").append(trainAccuracy);
-    sb.append(", validationLoss=").append(validationLoss);
-    sb.append(", validationAccuracy=").append(validationAccuracy);
-    sb.append('}');
-    return sb.toString();
-  }
 }
