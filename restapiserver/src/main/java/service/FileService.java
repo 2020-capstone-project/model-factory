@@ -1,31 +1,29 @@
 package service;
 
 import dto.FileDto;
-import error.ColumnDescriptionIsNumericException;
+import dto.FileUploadDto;
 import error.FileNotFoundException;
 import mapper.FileMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import util.FileSaveUtil;
 import util.FileValidCheckUtil;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.Objects;
 
 @Service
 public class FileService {
 
+  private final String DIRECTORY_PATH = "/Users/sangminlee/model-factory/restapiserver/src/main/resources/files/";
+
   @Autowired
   private FileMapper mapper;
 
-  public List<FileDto> selectList() {
-    return mapper.selectList();
+  public List<FileDto> selectListByMemberId(int id) {
+    return mapper.selectListByMemberId(id);
   }
 
   public String selectPathById(int id) {
@@ -35,9 +33,21 @@ public class FileService {
     return path;
   }
 
-  @Transactional
-  public void upload(MultipartFile multipartFile) throws IOException {
-    System.out.println(FileValidCheckUtil.getInstance().validFile(multipartFile));
+  public List<List<String>> saveFileToStorage(MultipartFile multipartFile) throws IOException {
+    FileValidCheckUtil.getInstance().validFile(multipartFile);
+    return FileSaveUtil.getInstance().save(multipartFile);
+  }
+
+  public int insertFileToDatabase(MultipartFile file, String description, boolean isPublic, int memberId) {
+    FileUploadDto fileUploadDto = FileUploadDto.builder()
+        .name(Objects.requireNonNull(file.getOriginalFilename()).replace(".csv", ""))
+        .description(description)
+        .isPublic(isPublic)
+        .memberId(memberId)
+        .path(DIRECTORY_PATH + file.getOriginalFilename())
+        .build();
+    mapper.insert(fileUploadDto);
+    return fileUploadDto.getId();
   }
 
 }

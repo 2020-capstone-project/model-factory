@@ -1,5 +1,6 @@
 package service;
 
+import dto.ColumnAndDataDto;
 import dto.DataDto;
 import error.ColumnNotFoundException;
 import mapper.DataMapper;
@@ -19,6 +20,13 @@ public class DataService {
     if (list == null || list.size() == 0)
       throw new ColumnNotFoundException();
     return list;
+  }
+
+  public void insertData(List<ColumnAndDataDto> columnAndDataList) {
+    columnAndDataList
+        .forEach(element -> element.getValue()
+            .forEach(
+                value -> mapper.insert(value, element.getId())));
   }
 
 }
