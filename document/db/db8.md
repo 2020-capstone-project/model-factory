@@ -81,7 +81,7 @@
 
 ## 물리적 설계
 
-![image-20200810205041607](../../../Library/Application Support/typora-user-images/image-20200810205041607.png)
+![image](https://user-images.githubusercontent.com/43431081/91653378-471c5d00-eadb-11ea-8cbd-29100e06c24c.png)
 
 <br>
 
