@@ -154,8 +154,9 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col cols="6">
+    <TestContent></TestContent>
+    <!-- <v-row justify="center">
+      <v-col cols="12">
         <v-card elevation="10" class="primary" primary dark>
           <v-card-title>
             <strong>학습 테스트 (입력값)</strong>
@@ -165,7 +166,9 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="6">
+    </v-row>
+    <v-row justify="center">
+      <v-col cols="12">
         <v-card elevation="10" class="primary" primary dark>
           <v-card-title>
             <strong>학습 테스트 (출력값)</strong>
@@ -175,13 +178,14 @@
           </v-card-text>
         </v-card>
       </v-col>
-    </v-row>
+    </v-row> -->
   </v-container>
 </template>
 
 <script>
 import { Chart } from 'highcharts-vue';
 import { getDetail } from '@/api/learningStatus';
+import TestContent from '@/components/test-content/TestContent.vue';
 
 let xList = [];
 for (let i = 1; i <= 100; i += 1) {
@@ -335,7 +339,7 @@ export default {
       this.lossChartOptions.series[1].data = this.learningInfo.validationLoss;
     },
   },
-  components: { Chart },
+  components: { Chart, TestContent },
   created() {
     this.fetchData();
     this.fileDownloadLink =
