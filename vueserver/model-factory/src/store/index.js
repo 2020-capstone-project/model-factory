@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import { loginUser } from '../api/auth';
 import { adjustInfo } from '../api/info';
+import { getFiles } from '@/api/file';
 
 Vue.use(Vuex);
 
@@ -12,7 +13,7 @@ export default new Vuex.Store({
     successSignup: false,
     successAdjust: false,
     learningDialog: false,
-    userId: '',
+    userId: '0',
     name: '',
     email: '',
     loginState: false,
@@ -39,8 +40,12 @@ export default new Vuex.Store({
       learningProgress: null,
       name: null,
     },
+    files: null,
   },
   getters: {
+    getUserId(state) {
+      return state.userId;
+    },
     getDrawer(state) {
       return state.drawer;
     },
@@ -90,6 +95,9 @@ export default new Vuex.Store({
     getDetailStatusInfo(state) {
       return state.detailStatusInfo;
     },
+    getFileList(state) {
+      return state.files;
+    },
   },
   mutations: {
     changeDrawer(state) {
@@ -103,9 +111,6 @@ export default new Vuex.Store({
     },
     setName(state, name) {
       state.name = name;
-    },
-    clearName(state) {
-      state.name = '';
     },
     setUserId(state, id) {
       state.userId = id;
@@ -198,6 +203,14 @@ export default new Vuex.Store({
     setLearningAccuracy(state, accuracy) {
       state.detailStatusInfo.accuracy = accuracy;
     },
+    setFiles(state, files) {
+      state.files = files;
+    },
+    resetUser(state) {
+      state.userId = '0';
+      state.name = '';
+      state.email = '';
+    },
   },
   actions: {
     async LOGIN({ commit }, userData) {
@@ -210,6 +223,10 @@ export default new Vuex.Store({
       await adjustInfo(userData);
       commit('setName', userData.name);
       commit('changeSuccessAdjust');
+    },
+    async SET_FILES({ commit }, userId) {
+      const { data } = await getFiles(userId);
+      commit('setFiles', data);
     },
   },
   modules: {},
