@@ -25,6 +25,8 @@ public class FileValidCheckUtil extends FileUtil {
   }
 
   public boolean validRecords(List<List<String>> records) {
+    if (records == null || records.size() == 0)
+      throw new NotExistValueException();
     if (!columnDescriptionIsNotNumeric(records))
       throw new ColumnDescriptionIsNumericException();
     records.remove(0);
