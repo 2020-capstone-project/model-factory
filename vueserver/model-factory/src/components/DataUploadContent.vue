@@ -145,21 +145,15 @@ export default {
 
         let formData = new FormData();
         formData.append('file', this.csv.file);
-
-        // let info = {
-        //   email: userEmail,
-        //   isPublic: this.isPublic,
-        //   description: this.fileDescription,
-        // };
-
         formData.append('email', userEmail);
         formData.append('isPublic', this.isPublic);
         formData.append('description', this.fileDescription);
-        const result = await uploadFile(formData);
-        console.log(result);
+        const { data } = await uploadFile(formData);
+        console.log(data.fileId);
+        this.$store.commit('setFileId', data.fileId);
+        this.$store.commit('nextSequence');
       } catch (error) {
         this.errorMessage = error.response.data.message;
-        console.log(error.response.data.message);
       }
     },
     getUserEmail() {

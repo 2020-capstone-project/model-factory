@@ -49,11 +49,13 @@
 </template>
 
 <script>
-import { getfiles } from '@/api/file';
+// import { getfiles } from s'@/api/file';
 
 export default {
+  props: ['fileList'],
   data() {
     return {
+      userId: this.$store.getters.getUserId,
       search: '',
       selected: [],
       headers: [
@@ -65,22 +67,12 @@ export default {
         },
         { text: '테이블 설명', value: 'description' },
       ],
-      tables: [],
+      tables: this.fileList,
     };
   },
   methods: {
     before() {
       this.$store.commit('setDataSelectMenu', '');
-    },
-    async fetchData() {
-      try {
-        this.$store.commit('visibleLearningDialog');
-        const { data } = await getfiles();
-        this.tables = data;
-      } catch (error) {
-      } finally {
-        this.$store.commit('invisibleLearningDialog');
-      }
     },
     selectTable() {
       this.$store.commit('setFileId', this.selected[0].id);
@@ -92,8 +84,10 @@ export default {
       return this.selected.length == 1;
     },
   },
-  created() {
-    this.fetchData();
+  watch: {
+    fileList: function(newVal) {
+      this.tables = newVal;
+    },
   },
 };
 </script>

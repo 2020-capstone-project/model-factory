@@ -68,7 +68,12 @@
 <script>
 export default {
   methods: {
-    setDataSelectMenu(menu) {
+    async setDataSelectMenu(menu) {
+      if (menu === 'load') {
+        console.log(this.$store.getters.getUserId);
+        await this.$store.dispatch('SET_FILES', this.$store.getters.getUserId);
+        console.log(this.$store.getters.getFileList);
+      }
       this.$store.commit('setDataSelectMenu', menu);
     },
   },

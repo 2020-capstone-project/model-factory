@@ -124,7 +124,7 @@ export default {
       this.$router.push('/learning-status');
     },
     logout() {
-      this.$store.commit('clearName');
+      this.$store.commit('resetUser');
       this.$router.push('/home');
     },
   },
