@@ -3,6 +3,7 @@ package service;
 import dto.FileDto;
 import dto.FileUploadDto;
 import error.FileNotFoundException;
+import error.SameFileNameException;
 import mapper.FileMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,12 @@ public class FileService {
     if (path == null)
       throw new FileNotFoundException();
     return path;
+  }
+
+  public void selectByName(String name) {
+    List<String> list = mapper.selectByName(name);
+    if (list != null && list.size() > 0)
+      throw new SameFileNameException();
   }
 
   public List<List<String>> saveFileToStorage(MultipartFile multipartFile) throws IOException {

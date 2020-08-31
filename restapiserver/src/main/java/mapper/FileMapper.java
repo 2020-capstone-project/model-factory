@@ -16,6 +16,9 @@ public interface FileMapper {
       "where f.memberId = m.id and (f.ispublic = true or f.memberId = #{id})")
   List<FileDto> selectListByMemberId(int id);
 
+  @Select("select name from _file where name = #{name}")
+  List<String> selectByName(String name);
+
   @Select("select path from _file where id = #{id}")
   String selectPathById(@Param("id") int id);
 
