@@ -30,7 +30,7 @@
                   <DataSelectContent></DataSelectContent>
                 </template>
                 <template v-else-if="getDataSelectMenu == 'load'">
-                  <TableSelectContent></TableSelectContent>
+                  <TableSelectContent :fileList="getFiles"></TableSelectContent>
                 </template>
                 <template v-else-if="getDataSelectMenu == 'upload'">
                   <DataUploadContent></DataUploadContent>
@@ -113,9 +113,10 @@ export default {
     ModelCustomizeContent,
     DataUploadContent,
   },
-  data() {
+  data: function() {
     return {
       dialog: true,
+      files: null,
     };
   },
   computed: {
@@ -124,6 +125,9 @@ export default {
     },
     getDataSelectMenu() {
       return this.$store.getters.getDataSelectMenu;
+    },
+    getFiles() {
+      return this.$store.getters.getFileList;
     },
   },
 };
