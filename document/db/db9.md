@@ -3,6 +3,7 @@
 ## 변경 사항
 
 - [x] `_FILE` , `_COLUMN` , `DATA` , `HISTORY` , `MODEL` , `LAYER` 테이블들의 외래키 조건에 `ON DELETE CASCADE` 조건 추가
+- [x] `LEARNING` 테이블에 `jsonb` 타입의 `inputColumns` 와 `outputColumns` 컬럼들을 추가
 
 <br>
 
@@ -55,12 +56,14 @@
   * 학습을 요청한 회원 번호(memberId)
   * 학습 시작한 날짜(learningDate)
   * 학습명(name)
+  * 입력 컬럼들 (inputColumns)
+  * 출력 컬럼들 (outputColumns)
 * **히스토리(HISTORY)**
   * 번호(id)
   * 훈련 손실값(trainLoss)
   * 훈련 정확도(trainAccuracy)
-  * 검증 손실값(verificationLoss)
-  * 검증 정확도(verificationAccuracy)
+  * 검증 손실값(validationLoss)
+  * 검증 정확도(validationAccuracy)
   * 시험 손실값(testLoss)
   * 시험 정확도(testAccuracy)
   * 히스토리 생성 날짜(createdDate)
@@ -80,7 +83,7 @@
 
 ## 물리적 설계
 
-![image](https://user-images.githubusercontent.com/43431081/91653378-471c5d00-eadb-11ea-8cbd-29100e06c24c.png)
+![image](https://user-images.githubusercontent.com/43431081/92206327-4a8c5b80-eec2-11ea-9dd4-6b98c9e7c639.png)
 
 <br>
 
@@ -228,6 +231,8 @@ create table LEARNING (
   learningDate timestamp,
   memberId integer,
   name varchar(50),
+  inputcolumns jsonb,
+  outputcolumns jsonb,
   foreign key (memberId) references member (id)
 );
 ```
@@ -241,8 +246,8 @@ create table HISTORY (
   id serial primary key,
   trainLoss double precision,
   trainAccuracy double precision,
-  verificationLoss double precision,
-  verificationAccuracy double precision,
+  validationLoss double precision,
+  validationAccuracy double precision,
   testLoss double precision,
   testAccuracy double precision,
   createdDate timestamp,
