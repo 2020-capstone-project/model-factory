@@ -29,9 +29,10 @@ public interface LearningStatusMapper {
       "order by executedEpoch")
   List<HistoryDto> selectHistoryList(@Param("learningId") int id);
 
-  @Select("select epoch, batchSize, lossFunction, optimizerFunction " +
+  @Select("select epoch, batchSize, lossFunction, optimizerFunction, inputcolumns as inputColumns, " +
+      "outputcolumns as outputColumns " +
       "from learning " +
       "where id = #{learningId}")
-  HyperparameterDto selectHyperparameters(@Param("learningId") int id);
+  HyperparameterDto selectHyperparametersAndColumns(@Param("learningId") int id);
 
 }
