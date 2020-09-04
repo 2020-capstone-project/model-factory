@@ -19,9 +19,9 @@ public class PersistenceConfig {
   public DataSource dataSource() {
     DataSource ds = new DataSource();
     ds.setDriverClassName("org.postgresql.Driver");
-    ds.setUrl("jdbc:postgresql://arjuna.db.elephantsql.com:5432/");
-    ds.setUsername("jmcocqns");
-    ds.setPassword("JKNbw_WHqA20r7iReBijpXMf8ThKO3rw");
+    ds.setUrl("jdbc:postgresql://localhost:5432/modelfactory");
+    ds.setUsername("sangminlee");
+    ds.setPassword("");
     ds.setInitialSize(2);
     ds.setMaxActive(10);
     return ds;
