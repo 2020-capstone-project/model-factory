@@ -154,31 +154,11 @@
         </v-card>
       </v-col>
     </v-row>
-    <TestContent></TestContent>
-    <!-- <v-row justify="center">
-      <v-col cols="12">
-        <v-card elevation="10" class="primary" primary dark>
-          <v-card-title>
-            <strong>학습 테스트 (입력값)</strong>
-          </v-card-title>
-          <v-card-text class="white text-primary">
-            <Chart class="pa-8" :options="lossChartOptions"></Chart>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row justify="center">
-      <v-col cols="12">
-        <v-card elevation="10" class="primary" primary dark>
-          <v-card-title>
-            <strong>학습 테스트 (출력값)</strong>
-          </v-card-title>
-          <v-card-text class="white text-primary">
-            <Chart class="pa-8" :options="lossChartOptions"></Chart>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row> -->
+    <TestContent
+      :inputColumns="inputColumns"
+      :outputColumns="outputColumns"
+      @update-result="updateResult"
+    ></TestContent>
   </v-container>
 </template>
 
@@ -194,6 +174,8 @@ for (let i = 1; i <= 100; i += 1) {
 
 export default {
   data: () => ({
+    inputColumns: null,
+    outputColumns: null,
     interval: null,
     learningInfo: {
       batchSize: null,
@@ -290,11 +272,24 @@ export default {
     },
   }),
   methods: {
+    updateResult(result) {
+      for (var i = 0; i < result.result.length; i++) {
+        this.outputColumns[i].value = result.result[i];
+      }
+    },
     async fetchData() {
       const { data } = await getDetail(
         this.$store.getters.getMemberId,
         this.$store.getters.getDetailStatusInfo.id,
       );
+      if (this.learningInfo.batchSize === null) {
+        this.inputColumns = data.inputColumns.map(obj => {
+          return { name: obj, value: 0.0 };
+        });
+        this.outputColumns = data.outputColumns.map(obj => {
+          return { name: obj, value: 0.0 };
+        });
+      }
       this.learningInfo = data;
       this.accuracyChartOptions.series[0].data = this.learningInfo.trainAccuracy;
       this.trainAccuracy = this.learningInfo.trainAccuracy[

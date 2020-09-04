@@ -8,4 +8,11 @@ function getDetail(memberId, learningId) {
   return learningStatus.get(`${memberId}/learning-status/${learningId}`);
 }
 
-export { getList, getDetail };
+function postTest(memberId, learningId, values) {
+  return learningStatus.post(
+    `${memberId}/learning-status/${learningId}/test`,
+    values,
+  );
+}
+
+export { getList, getDetail, postTest };
