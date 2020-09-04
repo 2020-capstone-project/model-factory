@@ -16,16 +16,16 @@ public class ModelService {
   public void insert(ModelDto modelDto) {
     int learningId = modelDto.getLearningId();
     modelDto.setModelPath(getModelPath(learningId));
-    modelDto.setDiagramPath(getDiagramPath(learningId));
     mapper.insert(modelDto);
+  }
+
+  public ModelDto selectOneByLearningId(int learningId) {
+    return mapper.selectOneByLearningId(learningId);
   }
 
   private String getModelPath(int learningId) {
     return RESOURCE_PATH + "/" + learningId + "/model.h5";
   }
 
-  private String getDiagramPath(int learningId) {
-    return RESOURCE_PATH + "/" + learningId + "/diagram.svg";
-  }
 
 }
