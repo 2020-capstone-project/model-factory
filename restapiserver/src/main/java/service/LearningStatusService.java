@@ -36,7 +36,7 @@ public class LearningStatusService {
       throw new MemberNotFoundException();
     return new GetLearningStatusResponseDto(
         learningStatusMapper.selectHistoryList(learningId),
-        learningStatusMapper.selectHyperparameters(learningId));
+        learningStatusMapper.selectHyperparametersAndColumns(learningId));
   }
 
   public FileSystemResource fileDownload(int memberId, int learningId, HttpServletResponse response) {
