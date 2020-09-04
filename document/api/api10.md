@@ -352,23 +352,15 @@
     "batchSize": 32,                 // 배치 사이즈
     "lossFunction": "binary",        // 손실 함수
     "optimizerFunction": "binary"    // 최적화 함수
+    "inputColumns": [                // 입력 컬럼들
+      "임신 횟수",
+    ],
+    "outputColumns": [               // 출력 컬럼들
+      "당뇨병 발병 여부"
+    ],
   }
   ```
 
-* *매퍼*
-
-  ```sql
-  -- 손실값, 정확도 리스트 (오름차순)
-  select trainLoss, round((trainAccuracy * 100)::numeric, 2) "trainAccuracy", validationLoss, round((validationAccuracy * 100)::numeric, 2) "validationAccuracy"
-  from history
-  where learningId = #{learningId}
-  order by executedEpoch;
-  
-  -- 하이퍼 파라미터
-  select epoch, batchSize, lossFunction, optimizerFunction
-  from learning
-  where id = #{learningId};
-  ```
 
 <br>
 
