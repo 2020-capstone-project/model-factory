@@ -1,13 +1,8 @@
 package mapper;
 
-import dto.LayerDto;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
-import org.json.simple.JSONObject;
 import org.postgresql.util.PGobject;
-
-import java.util.HashMap;
 
 public interface LayerMapper {
 
