@@ -50,10 +50,18 @@
 
 ### 전체 흐름
 
-<img src="https://github.com/2020-capstone-project/model-factory/blob/master/document/gif/rec.gif">
+<img src="https://github.com/2020-capstone-project/model-factory/blob/master/document/gif/1.gif" width="100%">
 
 <br>
 
 ### 추가 기능
 
-<img src="https://github.com/2020-capstone-project/model-factory/blob/master/document/gif/rec2.gif">
+#### 파일 업로드 & 모델 테스트 & 정보 수정
+
+<img src="https://github.com/2020-capstone-project/model-factory/blob/master/document/gif/2.gif" width="100%">
+
+<br>
+
+#### 파일 다운로드
+
+<img src="https://github.com/2020-capstone-project/model-factory/blob/master/document/gif/3.gif" width="100%">
