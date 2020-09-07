@@ -45,7 +45,7 @@
 * [Spring & PostgreSQL & MyBatis 연동](https://github.com/2020-capstone-project/model-factory/tree/master/document/mybatis)
 * [학습 요청 로직 순서도](https://github.com/2020-capstone-project/model-factory/tree/master/document/sequence/request-learning.md)
 * [학습 진행 순서도 & 히스토리와 모델 저장 순서도](https://github.com/2020-capstone-project/model-factory/tree/master/document/sequence/learning-and-save-history.md)
-* [학습 모델 테스르 순서도](https://github.com/2020-capstone-project/model-factory/tree/master/document/sequence/test-request.md)
+* [학습 모델 테스트 순서도](https://github.com/2020-capstone-project/model-factory/tree/master/document/sequence/test-request.md)
 
 <br>
 
