@@ -1,6 +1,6 @@
 # Sequence Diagram
 
-## 학습 & 히스토리 저장
+## 학습 진행 순서도 & 히스토리와 모델 저장 순서도
 
 ![image](https://user-images.githubusercontent.com/43431081/84882849-cdbfc180-b0ca-11ea-8d59-4e5b980f4453.png)
 
