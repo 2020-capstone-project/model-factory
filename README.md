@@ -48,17 +48,12 @@
 
 ## Preview
 
-(제작중)
+### 전체 흐름
 
-* **로그인**
+<img src="https://github.com/2020-capstone-project/model-factory/blob/master/document/gif/rec.gif">
 
-  ![image](https://user-images.githubusercontent.com/43431081/84344771-93e04e00-abe6-11ea-883a-eabc96542248.png)
+<br>
 
-* **회원가입**
+### 추가 기능
 
-  ![image](https://user-images.githubusercontent.com/43431081/84344819-af4b5900-abe6-11ea-867a-c32f3c3392ba.png)
-
-* **내 정보 수정**
-
-  ![image](https://user-images.githubusercontent.com/43431081/84344943-02bda700-abe7-11ea-9bdb-d6e35dae02bb.png)
-
+<img src="https://github.com/2020-capstone-project/model-factory/blob/master/document/gif/rec2.gif">
