@@ -59,12 +59,5 @@
 
 ### 추가 기능
 
-#### 파일 업로드 & 모델 테스트 & 정보 수정
-
-<img src="https://github.com/2020-capstone-project/model-factory/blob/master/document/gif/2.gif" width="100%">
-
-<br>
-
-#### 파일 다운로드
-
-<img src="https://github.com/2020-capstone-project/model-factory/blob/master/document/gif/3.gif" width="100%">
+* [파일 업로드 & 모델 테스트 & 정보 수정](https://github.com/2020-capstone-project/model-factory/blob/master/document/gif/1.md)
+* [파일 다운로드](https://github.com/2020-capstone-project/model-factory/blob/master/document/gif/2.md)
