@@ -5,7 +5,9 @@ import dto.DataDto;
 import error.ColumnNotFoundException;
 import mapper.DataMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +17,7 @@ public class DataService {
   @Autowired
   private DataMapper mapper;
 
+  @Transactional
   public List<DataDto> selectListByColumnId(int id) {
     List<DataDto> list = mapper.selectListByColumnId(id);
     if (list == null || list.size() == 0)

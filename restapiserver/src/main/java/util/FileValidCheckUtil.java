@@ -51,13 +51,13 @@ public class FileValidCheckUtil extends FileUtil {
     return records
         .parallelStream()
         .flatMap(Collection::stream)
-        .allMatch(str -> !str.isBlank() && !isNotNumeric(str));
+        .allMatch(str -> !str.isEmpty() && !isNotNumeric(str));
   }
 
   private boolean columnDescriptionIsNotNumeric(List<List<String>> records) {
     return Stream.of(records.get(0), records.get(1))
         .flatMap(Collection::stream)
-        .allMatch(str -> isNotNumeric(str) && !str.isBlank());
+        .allMatch(str -> isNotNumeric(str) && !str.isEmpty());
   }
 
 }

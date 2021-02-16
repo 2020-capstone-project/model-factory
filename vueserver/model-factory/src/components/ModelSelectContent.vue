@@ -74,13 +74,24 @@ export default {
       this.$store.commit('nextSequence');
     },
     setLayers() {
-      this.$store.commit(
-        'setLayers',
-        this.recommendModel.getRecommendLayers(
-          this.$store.getters.getPrediction,
-          this.$store.getters.getOutputColumnsLength,
-        ),
-      );
+      const prediction = this.$store.getters.getPrediction;
+      if (prediction !== 'multiple') {
+        this.$store.commit(
+          'setLayers',
+          this.recommendModel.getRecommendLayers(
+            this.$store.getters.getPrediction,
+            this.$store.getters.getOutputColumnsLength,
+          ),
+        );
+      } else {
+        this.$store.commit(
+          'setLayers',
+          this.recommendModel.getRecommendLayers(
+            this.$store.getters.getPrediction,
+            this.$store.getters.getOutputLengthForMultiple,
+          ),
+        );
+      }
     },
   },
 };

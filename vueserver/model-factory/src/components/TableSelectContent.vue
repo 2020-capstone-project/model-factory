@@ -2,8 +2,8 @@
   <v-container fluid>
     <v-row justify="center" align="center">
       <v-col cols="12">
-        <v-alert v-if="!isSelectedTable" type="error" class="mb-5">
-          테이블을 반드시 선택해주세요.
+        <v-alert v-if="!isSelectedTable" type="success" class="mb-5">
+          학습 시킬 테이블을 선택해주세요.
         </v-alert>
         <v-card>
           <v-card-title class="text-h4">
@@ -81,6 +81,7 @@ export default {
   },
   computed: {
     isSelectedTable() {
+      console.log(this.selected.length);
       return this.selected.length == 1;
     },
   },

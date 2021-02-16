@@ -41,6 +41,7 @@ export default new Vuex.Store({
       name: null,
     },
     files: null,
+    outputLengthForMultiple: 0,
   },
   getters: {
     getUserId(state) {
@@ -97,6 +98,9 @@ export default new Vuex.Store({
     },
     getFileList(state) {
       return state.files;
+    },
+    getOutputLengthForMultiple(state) {
+      return state.outputLengthForMultiple;
     },
   },
   mutations: {
@@ -165,6 +169,9 @@ export default new Vuex.Store({
     },
     setLearningName(state, name) {
       state.learningData.name = name;
+    },
+    setOutputLengthForMultiple(state, length) {
+      state.outputLengthForMultiple = length;
     },
     resetData(state) {
       state.sequence = 1;

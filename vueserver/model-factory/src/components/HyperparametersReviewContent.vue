@@ -43,7 +43,7 @@
           </template>
           <span
             >배치사이즈란?<br />
-            설명.</span
+            학습 모델을 몇 샘플 마다 업데이트 시킬지를 결정하는 값</span
           >
         </v-tooltip>
       </v-col>
@@ -63,8 +63,16 @@
           </template>
           <span
             >손실 함수란?<br />
-            설명.</span
-          >
+            컴퓨터가 대입한 결과와 실제 결과의 오차(손실)를 계산하는 함수<br /><br />
+            1) mean_squared_error: 예측한 값과 실제 값 사이의 평균 제곱 오차를
+            정의한다. 주로 수치 예측에 사용된다.<br /><br />
+            2) binary_crossentropy: 실제 결과값과 예측 결과값 간의 교차 엔트로피
+            손실을 계산한다. 주로 이진 분류 예측에 사용된다.<br /><br />
+            3) categorical_crossentropy: 결과 값의 경우가 2개 이상일 경우
+            사용되며,<br /><br />
+            실제 결과값과 예측 결과값 간의 교차 엔트로피 손실을 계산한다. 주로
+            다중 분류 예측에 사용된다.<br />
+          </span>
         </v-tooltip>
       </v-col>
       <v-col class="d-flex" cols="12">
@@ -82,9 +90,20 @@
             >
           </template>
           <span
-            >최적화 함수란?<br />
-            설명.</span
-          >
+            >최적화 알고리즘 이란?<br />
+            손실 함수의 결괏값을 최소화하는 값을 찾아주는 알고리즘<br /><br />
+            1) sgd(Stochastic gradient decent): 학습 데이터를 전체적으로<br />
+            학습하는 것이 아니라 batch 라는 단위로 데이터를 나눠 학습시키는
+            알고리즘
+            <br /><br />
+            2) rmsprop(RMSProp): 이전의 학습을 반영해서 학습시키는 알고리즘<br /><br />
+            3) adagrad(AdaGrad): 학습을 통해 크게 변동이 있었던 예측값에
+            대해서는<br />
+            학습률을 감소시키고, 학습을 통해 예측값에 변동이 별로 없으면
+            학습률을 증가시켜 학습시키는 알고리즘<br /><br />
+            4) adam(Adam): 이전에 batch 크기만큼 학습한 결과와 RMSProp 방식을<br />
+            같이 학습에 반영하는 알고리즘<br />
+          </span>
         </v-tooltip>
       </v-col>
     </v-col>
@@ -99,15 +118,7 @@ export default {
     return {
       optimizer: '',
       loss: '',
-      optimizerFunctions: [
-        'sgd',
-        'rmsprop',
-        'adagrad',
-        'adadelta',
-        'adam',
-        'adamax',
-        'nadam',
-      ],
+      optimizerFunctions: ['sgd', 'rmsprop', 'adagrad', 'adam'],
       lossFunctions: [
         'mean_squared_error',
         'binary_crossentropy',

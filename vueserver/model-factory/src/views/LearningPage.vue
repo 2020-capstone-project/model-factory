@@ -76,7 +76,7 @@
       >
         <a
           href="https://github.com/2020-capstone-project/model-factory"
-          class="s mt-3"
+          class="mt-3"
           style="text-decoration: none"
           icon
         >

@@ -6,7 +6,7 @@ from tensorflow.keras.layers import Dense, Dropout
 from implement.service.CustomHistory import CustomHistory
 from implement.dto.LearningDto import LearningDto
 from implement.service.LearningThread import LearningThread
-
+from keras.utils import to_categorical
 
 class LearningService:
     def __init__(self, requestDto):
@@ -31,7 +31,13 @@ class LearningService:
         self.x_train = self.x_train[:train_length]
 
         # 학습셋, 검증셋, 시험셋 분리
-        self.y_train = dataset[self.requestDto.get('outputColumns')].values[1:].astype('float32')
+        if self.requestDto.get('lossFunction') == 'categorical_crossentropy':
+            layers = self.requestDto.get('layers')
+            lastLayer = layers[len(layers) - 1]
+            self.y_train = dataset[self.requestDto.get('outputColumns')].values[1:].astype('int')
+            self.y_train = to_categorical(self.y_train, num_classes=int(lastLayer['information']['neuronCount']))
+        else:
+            self.y_train = dataset[self.requestDto.get('outputColumns')].values[1:].astype('float32')
         self.y_test = self.y_train[train_length + val_length:]
         self.y_val = self.y_train[train_length: train_length + val_length]
         self.y_train = self.y_train[:train_length]

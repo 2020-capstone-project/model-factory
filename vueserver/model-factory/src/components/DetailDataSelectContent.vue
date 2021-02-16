@@ -17,6 +17,10 @@
               hide-details
             ></v-text-field>
           </v-card-title>
+          <v-card-text>
+            <b>학습 목표 컬럼이란?</b> 해당 학습을 통해서 값을 예측할 컬럼을
+            뜻합니다.
+          </v-card-text>
 
           <v-data-table
             v-if="isSelectedTable"
@@ -44,7 +48,7 @@
       <v-btn color="grey text-white" @click="before">
         before
       </v-btn>
-      <v-col col="1"></v-col>
+      <v-spacer></v-spacer>
       <v-btn color="primary" @click="next" class="ml-5">
         Continue
       </v-btn>
@@ -59,6 +63,7 @@ export default {
   data() {
     return {
       search: '',
+      dialog: false,
       selected: [],
       headers: [
         {
@@ -120,9 +125,9 @@ export default {
         if (element.learningTarget) outputColumns.push(element.name);
         else inputColumns.push(element.name);
       });
-      if (outputColumns.length < 1) {
+      if (outputColumns.length != 1) {
         this.valid = false;
-        this.errorMessage = '학습 목표 컬럼을 반드시 선택해주세요.';
+        this.errorMessage = '학습 목표 컬럼을 반드시 하나만 선택해주세요.';
         return;
       } else if (inputColumns.length < 1) {
         this.valid = false;

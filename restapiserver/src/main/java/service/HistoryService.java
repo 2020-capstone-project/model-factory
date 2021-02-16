@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class HistoryService {
 
-  @Autowired
   private HistoryMapper mapper;
+
+  @Autowired
+  public HistoryService(HistoryMapper mapper) {
+    this.mapper = mapper;
+  }
 
   public void insert(PostHistoryRequestDto dto) {
     mapper.insert(dto);
